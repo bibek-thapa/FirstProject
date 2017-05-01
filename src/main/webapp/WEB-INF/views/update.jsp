@@ -1,10 +1,11 @@
 <%-- 
-    Document   : index
-    Created on : Apr 22, 2017, 9:40:18 PM
+    Document   : update
+    Created on : May 1, 2017, 10:16:01 PM
     Author     : Dell
 --%>
-<%@include file="header.jsp" %>
+
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
+<%@include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +13,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/person/create">
+        
+        <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/person/edit/${person.id}">
 <!--  <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-6">
@@ -22,7 +24,7 @@
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-6">
-      <input  class="form-control" id="inputPassword3" placeholder="Person Name" name="firstName">
+      <input  class="form-control" id="inputPassword3" value="${person.firstName}" name="firstName">
     </div>
   </div>
 <!--  <div class="form-group">
@@ -36,23 +38,9 @@
   </div>-->
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" class="btn btn-default">Update</button>
     </div>
   </div>
 </form>
-        
-        <h1>Welcome to the Home page</h1>
-        <p>
-            Welcome to the Person Application </br>
-            <i>${message}</i> </br>
-            <a href ="${pageContext.request.contextPath}/person/create">Create a new person</a></br>
-                        <a href ="${pageContext.request.contextPath}/person/list">List all shops</a></br>
-
-            
-            
-        </p>
-        
-        
-        
     </body>
 </html>

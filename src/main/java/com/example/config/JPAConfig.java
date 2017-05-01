@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
+
 public class JPAConfig {
 
     @Bean
@@ -54,8 +55,9 @@ public class JPAConfig {
     private Properties additionalProperties() {
 
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+//        properties.setProperty("hibernate.hbm2ddl.auto", "create");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+         properties.setProperty("show_sql", "true");
         return properties;
 
     }
