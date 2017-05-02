@@ -14,10 +14,10 @@ import java.util.List;
 public interface GenericDAO <T>{
     
     public List<T> getAll();
-    int insert(T c);
-    T getById(int id);
-    void delete(int id);
-    void update(int id);
-    T getByName(String name);
+   public T insert(T c);
+    public T getById(Long id);
+    public T delete(Long id);
+    public T update(T c);
+    public T getByName(String name);
     
 }

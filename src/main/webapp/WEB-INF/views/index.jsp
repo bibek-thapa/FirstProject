@@ -12,7 +12,48 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/person/create">
+  <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/person/create">
+<
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-6">
+      <input  class="form-control" id="inputPassword3" placeholder="Person Name" name="firstName">
+    </div>
+    <br/>
+    
+    
+    <div class="col-sm-6">
+            <label  class="col-sm-2 control-label">Company</label>
+            <select  name="company.id" class="form-control">
+                
+                <c:forEach var="company" items="${companyList}">
+                    
+                <option class="form-control" value="${company.id}">${company.companyName}Ram</option>
+               
+                </c:forEach>
+                  
+            </select>
+        </div>
+  </div>
+
+
+<!--  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+    </div>
+  </div>-->
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+  </div>
+</form>
+
+  <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/company/create">
 <!--  <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-6">
@@ -22,7 +63,7 @@
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-6">
-      <input  class="form-control" id="inputPassword3" placeholder="Person Name" name="firstName">
+      <input  class="form-control" id="inputPassword3" placeholder="Company Name" name="companyName">
     </div>
   </div>
 <!--  <div class="form-group">
@@ -40,13 +81,17 @@
     </div>
   </div>
 </form>
+
+
+
         
         <h1>Welcome to the Home page</h1>
         <p>
             Welcome to the Person Application </br>
             <i>${message}</i> </br>
             <a href ="${pageContext.request.contextPath}/person/create">Create a new person</a></br>
-                        <a href ="${pageContext.request.contextPath}/person/list">List all shops</a></br>
+                        <a href ="${pageContext.request.contextPath}/person/list">List all persons</a></br>
+                        <a href ="${pageContext.request.contextPath}/company/list">List all companies</a></br>
 
             
             

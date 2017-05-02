@@ -8,9 +8,12 @@ package com.example.data;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,8 +24,22 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(name = "FIRST_NAME")
+    @Column(name = "FIRST_NAME",nullable = false)
     private String firstName;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "COMPANY_ID",nullable = false)
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+    
+    
 
     public String getFirstName() {
         return firstName;

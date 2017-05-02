@@ -14,36 +14,34 @@
         <title>JSP Page</title>
     </head>
     <body>
-
-
+        
+      
 
         <table class="table table-hover  table-striped">
 
             <tr>
                 <th>Id</th>
-                <th>First Name</th>
-                <th>Company</th>
+                <th>Company Name</th>
                 <th>Edit</th>
                 <th>Delete</th>
 
             </tr>
 
             <tr>
-                <c:forEach var="person" items="${personList}">
-                    <td>${person.id}</td>
-                    <td>${person.firstName}</td>
-                    <td>${person.company.companyName}</td>
+                <c:forEach var="company" items="${companyList}">
+                    <td>${company.id}</td>
+                    <td>${company.companyName}</td>
                     <td>
-                        <a href="${SITE_URL}/person/edit/${person.id}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="${SITE_URL}/person/edit/${company.id}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                     </td>
-                    <td> <a href="${SITE_URL}/person/delete/${person.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure?')"></span></a></td>
+                    <td> <a href="${SITE_URL}/person/delete/${company.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure?')"></span></a></td>
                     </br>
 
-                </tr>
-            </c:forEach>
+                     </tr>
+                </c:forEach>
 
 
-
+           
 
 
         </table>
@@ -52,5 +50,5 @@
 
         <i>${message}</i>
 
-    </body>
+</body>
 </html>

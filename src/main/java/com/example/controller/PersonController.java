@@ -5,7 +5,9 @@
  */
 package com.example.controller;
 
+import com.example.DAOService.CompanyService;
 import com.example.DAOService.PersonDAOService;
+import com.example.data.Company;
 import com.example.data.Person;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,17 @@ public class PersonController {
 
     @Autowired
     private PersonDAOService personDAOService;
+    
+   
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ModelAndView create(@ModelAttribute Person person, final RedirectAttributes redirectAttributes) {
         ModelAndView mav = new ModelAndView();
+       
         personDAOService.create(person);
 
         String message = "Person  " + person.getFirstName() + "  was succesfully created";
+       
         mav.setViewName("redirect:/");
         redirectAttributes.addFlashAttribute("message", message);
         return mav;
@@ -71,6 +77,7 @@ public class PersonController {
     public ModelAndView editById(@PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView("update");
         Person person = personDAOService.findById(id);
+       
         mav.addObject("person", person);
         return mav;
 
