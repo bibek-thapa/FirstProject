@@ -20,7 +20,7 @@ public class HomeController {
 	public String index(Model model){
             List<Company> companyList = companyService.getAll();
             model.addAttribute("companyList", companyList);
-		return "person-new";
+		return "index";
 	}
     
 	@RequestMapping(value="/home", method = RequestMethod.GET)

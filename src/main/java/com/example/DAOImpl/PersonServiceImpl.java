@@ -2,7 +2,6 @@ package com.example.DAOImpl;
 
 import com.example.DAOService.PersonDAOService;
 import com.example.data.Person;
-import com.example.repository.CompanyRepository;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +52,7 @@ public class PersonServiceImpl implements PersonDAOService {
         
         Person updatedPerson = personRepository.findOne(person.getId());
         updatedPerson.setFirstName(person.getFirstName());
+        updatedPerson.setCompany(person.getCompany());
         
         return updatedPerson;
         

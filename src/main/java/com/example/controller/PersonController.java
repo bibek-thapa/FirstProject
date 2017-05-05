@@ -26,6 +26,9 @@ public class PersonController {
     @Autowired
     private PersonDAOService personDAOService;
     
+    @Autowired
+    private CompanyService companyService;
+    
    
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -77,7 +80,8 @@ public class PersonController {
     public ModelAndView editById(@PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView("update");
         Person person = personDAOService.findById(id);
-       
+        List<Company> companyList = companyService.getAll();
+        mav.addObject("companyList", companyList);
         mav.addObject("person", person);
         return mav;
 
@@ -87,6 +91,7 @@ public class PersonController {
     public ModelAndView editById(@PathVariable("id") Long id,@ModelAttribute Person person,final RedirectAttributes redirectAttributes) {
         ModelAndView mav = new ModelAndView();
         personDAOService.update(person);
+        
         String message = "Person " + person.getFirstName() + " is updated";
         redirectAttributes.addFlashAttribute("message", message);
         mav.setViewName("redirect:/person/list");

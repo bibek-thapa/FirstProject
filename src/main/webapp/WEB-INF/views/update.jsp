@@ -24,11 +24,11 @@
   </div>
     <div class="col-sm-6">
             <label  class="col-sm-2 control-label">Company</label>
-            <select  name="company.id" class="form-control">
+            <select  name="company1" class="form-control" v>
                 
                 <c:forEach var="company" items="${companyList}">
                     
-                <option class="form-control" value="${person.company.companyName}">${company.companyName}</option>
+                <option class="form-control"  >${company.companyName}</option>
                
                 </c:forEach>
                   

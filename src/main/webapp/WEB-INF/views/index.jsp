@@ -28,7 +28,7 @@
                 
                 <c:forEach var="company" items="${companyList}">
                     
-                <option class="form-control" value="${company.id}">${company.companyName}Ram</option>
+                <option class="form-control" value="${company.id}">${company.companyName}</option>
                
                 </c:forEach>
                   

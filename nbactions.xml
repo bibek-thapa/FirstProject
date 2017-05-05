@@ -15,4 +15,11 @@
                 <goal>clean</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-update</actionName>
+            <displayName>update</displayName>
+            <goals>
+                <goal>update</goal>
+            </goals>
+        </action>
     </actions>
