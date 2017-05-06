@@ -8,12 +8,7 @@
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <%@include file ="header.jsp" %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>JSP Page</title>
-    </head>
-    <body>
+
         
       
 
@@ -50,5 +45,4 @@
 
         <i>${message}</i>
 
-</body>
-</html>
+ <%@include file = "footer.jsp"%>

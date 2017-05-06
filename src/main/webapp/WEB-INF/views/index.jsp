@@ -13,7 +13,7 @@
     </head>
     <body>
   <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/person/create">
-<
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-6">
@@ -60,6 +60,7 @@
       <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
     </div>
   </div>-->
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-6">
@@ -96,6 +97,8 @@
             
             
         </p>
+        
+        <a href="<c:url value="/logout" />">Logout</a>
         
         
         

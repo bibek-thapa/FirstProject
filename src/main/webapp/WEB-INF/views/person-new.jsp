@@ -1,5 +1,6 @@
-<%@include file="header.jsp" %>
+
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
+<%@include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
