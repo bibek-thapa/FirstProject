@@ -13,11 +13,4 @@
     
     </head>
     <body>
-         <div class="container">
-             <nav class="navbar navbar-inverse navbar-static-top" title="Welcome to our website" ></nav>
-             
-       
-        
-         </div>
-    </body>
-</html>
+         

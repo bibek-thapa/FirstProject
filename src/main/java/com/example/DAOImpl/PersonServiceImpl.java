@@ -19,8 +19,7 @@ public class PersonServiceImpl implements PersonDAOService {
     
     
 
-    @Override
-    @Transactional
+   
     public Person create(Person person) {
 
         person.setFirstName(person.getFirstName());
@@ -29,8 +28,7 @@ public class PersonServiceImpl implements PersonDAOService {
 
     }
 
-    @Override
-    @Transactional
+    
     public Person delete(long id) {
 
         Person deletedPerson = personRepository.findOne(id);
@@ -39,16 +37,13 @@ public class PersonServiceImpl implements PersonDAOService {
         return deletedPerson;
 
     }
-    
-    @Override
-    @Transactional
+   
     public List<Person> findAll() {
 
         return personRepository.findAll();
     }
     
-    @Override
-    @Transactional
+   
     public Person update(Person person) {
         
         Person updatedPerson = personRepository.findOne(person.getId());
@@ -58,8 +53,7 @@ public class PersonServiceImpl implements PersonDAOService {
         
     }
     
-    @Override
-    @Transactional
+    
     public Person findById(long id) {
         
        return personRepository.findOne(id);

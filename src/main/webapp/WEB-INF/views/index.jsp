@@ -1,17 +1,7 @@
-<%-- 
-    Document   : index
-    Created on : Apr 22, 2017, 9:40:18 PM
-    Author     : Dell
---%>
+
 <%@include file="header.jsp" %>
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>JSP Page</title>
-    </head>
-    <body>
+
   <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/person/create">
 <
   <div class="form-group">
@@ -28,7 +18,7 @@
                 
                 <c:forEach var="company" items="${companyList}">
                     
-                <option class="form-control" value="${company.id}">${company.companyName}Ram</option>
+                <option class="form-control" value="${company.id}">${company.companyName}</option>
                
                 </c:forEach>
                   
