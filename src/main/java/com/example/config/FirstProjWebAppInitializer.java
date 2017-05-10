@@ -9,7 +9,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 
 public class FirstProjWebAppInitializer implements WebApplicationInitializer {
-private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
+private static final String DISPATCHER_SERVLET_NAME = "dispatcher1";
 
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
