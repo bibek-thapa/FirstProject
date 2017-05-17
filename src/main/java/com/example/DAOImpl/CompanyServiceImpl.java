@@ -11,7 +11,6 @@ import com.example.repository.CompanyRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 
@@ -58,7 +57,9 @@ public class CompanyServiceImpl implements CompanyService {
 
         Company toUpdate = companyRepository.findOne(c.getId());
         toUpdate.setCompanyName(c.getCompanyName());
-        return toUpdate;
+        
+       
+        return companyRepository.save(toUpdate);
 
     }
 

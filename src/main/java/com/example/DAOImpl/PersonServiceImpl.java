@@ -48,8 +48,9 @@ public class PersonServiceImpl implements PersonDAOService {
         
         Person updatedPerson = personRepository.findOne(person.getId());
         updatedPerson.setFirstName(person.getFirstName());
+        updatedPerson.setCompany(person.getCompany());
         
-        return updatedPerson;
+        return personRepository.save(updatedPerson);
         
     }
     

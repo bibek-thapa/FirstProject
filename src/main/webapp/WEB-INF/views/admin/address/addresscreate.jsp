@@ -5,11 +5,11 @@
 
 <h1 class="text-center">  Address  </h1>
 <br/>
-<form class="form-horizontal" method="POST" action="${pageContext.request.contextPath}/address/create">
+<form class="form-horizontal" method="POST" action="${SITE_URL}/address/create">
     
 <div class="form-group">
 <label for="Zone" class="col-sm-3 control-label">Zone</label>
-<div class="col-sm-9">
+<div class="col-sm-8">
 <input type="text" class="form-control" 
 placeholder="Zone" name="zone">
 </div>
@@ -17,15 +17,15 @@ placeholder="Zone" name="zone">
     
     <div class="form-group">
 <label for="District" class="col-sm-3 control-label">District</label>
-<div class="col-sm-9">
+<div class="col-sm-8">
 <input type="text" class="form-control" 
 placeholder="District"  name="district">
 </div>
 </div>
     
     <div class="form-group">
-<label for="TEMP_ADDRESS" class="col-sm-3 control-label">TEMP_ADDRESS</label>
-<div class="col-sm-9">
+<label for="TEMP_ADDRESS" class="col-sm-3 control-label">TEMPORARY ADDRESS</label>
+<div class="col-sm-8">
 <input type="text" class="form-control" 
 placeholder="TEMP_ADDRESS" name="tempAddress">
 </div>
@@ -33,8 +33,8 @@ placeholder="TEMP_ADDRESS" name="tempAddress">
     
     
     <div class="form-group">
-<label for="PERMANENT_ADDRESS" class="col-sm-3 control-label">PERMANENT_ADDRESS</label>
-<div class="col-sm-9">
+<label for="PERMANENT_ADDRESS" class="col-sm-3 control-label">PERMANENT ADDRESS</label>
+<div class="col-sm-8">
 <input type="text" class="form-control" 
 placeholder="PERMANENT_ADDRESS" name="permanentAddress">
 </div>
@@ -44,9 +44,10 @@ placeholder="PERMANENT_ADDRESS" name="permanentAddress">
         
     
     
-    
-        <div class="col-md-8 text-center"> 
-  <button id="button" name="button" class="btn btn-primary">Submit</button> 
+   <div class="clearfix">&nbsp;</div>
+<div class="col-sm-12 text-center">
+<button type="submit" class="btn btn-primary btn-md"><span
+class="glyphicon glyphicon-send"></span>&nbsp;Submit</button>
 </div>
 
     

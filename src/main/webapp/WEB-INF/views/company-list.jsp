@@ -32,9 +32,9 @@
                     <td>${company.id}</td>
                     <td>${company.companyName}</td>
                     <td>
-                        <a href="${SITE_URL}/person/edit/${company.id}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="${SITE_URL}/company/edit/${company.id}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                     </td>
-                    <td> <a href="${SITE_URL}/person/delete/${company.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure?')"></span></a></td>
+                    <td> <a href="${SITE_URL}/company/delete/${company.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure?')"></span></a></td>
                     </br>
 
                      </tr>

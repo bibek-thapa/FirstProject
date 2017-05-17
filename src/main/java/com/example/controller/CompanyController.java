@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,5 +45,28 @@ public class CompanyController {
     
     }
     
+    @RequestMapping(value = "/edit/{id}",method = RequestMethod.GET)
+    public ModelAndView editcompany(@PathVariable("id") Long id)
+    {
+        ModelAndView mav = new ModelAndView("admin/company/company-update");
+        Company company = companyService.getById(id);
+        mav.addObject("company", company);
+    return mav;
+    }
     
+    @RequestMapping(value = "/edit/{id}",method = RequestMethod.POST)
+    public ModelAndView editcompany(@PathVariable("id") Long id,@ModelAttribute Company company,final RedirectAttributes redirectAttributes)
+    
+    {
+        ModelAndView mav = new ModelAndView();
+         companyService.update(company);
+       
+        String message = "Company "+ company.getCompanyName()+" is succesfully updated";
+        redirectAttributes.addFlashAttribute("message", message);
+        mav.setViewName("redirect:/company/list");
+        return mav;
+        
+    
+    
+    }    
 }
