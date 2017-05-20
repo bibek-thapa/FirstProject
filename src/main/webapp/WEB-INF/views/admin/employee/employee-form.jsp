@@ -1,42 +1,42 @@
-
-
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <%@include file = "../../header.jsp" %>
 
-<h1 class="text-center">  Address  </h1>
+<h1 class="text-center">  Employee Details </h1>
 <br/>
-<form class="form-horizontal" method="POST" action="${SITE_URL}/address/create">
+<form class="form-horizontal" method="POST" action="${SITE_URL}/employee/create">
 
     <div class="form-group">
-        <label for="Zone" class="col-sm-3 control-label">Zone</label>
+        <label for="FirstName" class="col-sm-3 control-label">First Name</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" 
-                   placeholder="Zone" name="zone">
+                   placeholder="FirstName" name="firstName">
         </div>
     </div>
 
     <div class="form-group">
-        <label for="District" class="col-sm-3 control-label">District</label>
+        <label for="Last Name" class="col-sm-3 control-label">Last Name</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" 
-                   placeholder="District"  name="district">
+                   placeholder="Last Name"  name="lastName">
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="TEMP_ADDRESS" class="col-sm-3 control-label">TEMPORARY ADDRESS</label>
+   
+    
+     <div class="form-group">
+        <label for="ADDRESS" class="col-sm-3 control-label">ADDRESS</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" 
-                   placeholder="TEMP_ADDRESS" name="tempAddress">
+                   placeholder="ADDRESS" name="address">
         </div>
     </div>
 
 
     <div class="form-group">
-        <label for="PERMANENT_ADDRESS" class="col-sm-3 control-label">PERMANENT ADDRESS</label>
+        <label for="Contact Number" class="col-sm-3 control-label">Contact Number</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" 
-                   placeholder="PERMANENT_ADDRESS" name="permanentAddress">
+                   placeholder="Enter the Contact Number" name="contactNumber">
         </div>
     </div>
     <br/>
@@ -58,4 +58,3 @@
 </form>        
 
 <%@include file = "../../footer.jsp" %>
-

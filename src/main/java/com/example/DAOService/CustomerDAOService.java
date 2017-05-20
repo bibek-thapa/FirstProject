@@ -5,19 +5,19 @@
  */
 package com.example.DAOService;
 
-import com.example.data.Person;
+import com.example.data.Customer;
 import java.util.List;
 
 /**
  *
  * @author Dell
  */
-public interface PersonDAOService {
+public interface CustomerDAOService {
     
-    public Person create(Person person);
-    public Person delete(long id);
-    public List<Person> findAll();
-    public Person update(Person person);
-    public Person findById(long id);
+    public Customer create(Customer customer);
+    public Customer delete(long id);
+    public List<Customer> findAll();
+    public Customer update(Customer customer);
+    public Customer findById(long id);
     
 }

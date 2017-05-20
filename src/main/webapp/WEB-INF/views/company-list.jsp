@@ -20,6 +20,7 @@
         <table class="table table-hover  table-striped">
 
             <tr>
+                
                 <th>Id</th>
                 <th>Company Name</th>
                 <th>Edit</th>

@@ -12,16 +12,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Company")
 public class Company {
-   @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-   
-   @Column(name = "COMPANY_NAME")
-   private String companyName;
-   
-   
-   
-   
+
+    @Column(name = "COMPANY_NAME")
+    private String companyName;
+
     public Long getId() {
         return id;
     }
@@ -38,11 +36,4 @@ public class Company {
         this.companyName = companyName;
     }
 
-    
-   
-   
-   
-   
-   
-    
 }

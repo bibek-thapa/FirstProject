@@ -1,93 +1,61 @@
 
 <%@include file="header.jsp" %>
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
+<nav class="navbar navbar-collapse navbar-fixed-top navbar-inverse" >
 
-  <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/person/create">
-<
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-6">
-      <input  class="form-control" id="inputPassword3" placeholder="Person Name" name="firstName">
-    </div>
-    <br/>
-    
-    
-    <div class="col-sm-6">
-            <label  class="col-sm-2 control-label">Company</label>
-            <select  name="company.id" class="form-control">
-                
-                <c:forEach var="company" items="${companyList}">
-                    
-                <option class="form-control" value="${company.id}">${company.companyName}</option>
-               
-                </c:forEach>
-                  
-            </select>
-        </div>
-  </div>
+    <div class="container-fluid">
+        <ul class="nav nav-pills">
+            <li class="active"><a href="/index.html"><span
+                        class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
+            <li><a href="/index.html"><span
+                        class="glyphicon glyphicon-briefcase"></span>&nbsp;Products</a></li>
+            <li><a href="/index.html"><span
+                        ></span>&nbsp;Departments</a></li>
+            <li><a href="/contact.html"><span class="glyphicon glyphicon-earphone"></
+                        span>ContactUs&nbsp;</a></li>
+
+            <ul class="nav nav-pills navbar-right">
+
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></
+                            span>&nbsp;Sign In</a></li>
+
+                      <li class="dropdown">  
+                        <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></
+                                span>Welcome<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><span class="glyphicon glyphicon-picture"></
+                                        span>&nbsp;My Profile</a></li> 
+                        </ul>    
+                    </li>
+              
+            </ul>
+        </ul>
 
 
-<!--  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox"> Remember me
-        </label>
-      </div>
-    </div>
-  </div>-->
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Submit</button>
-    </div>
-  </div>
-</form>
+    </div> 
+</nav>   
 
-  <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/company/create">
-<!--  <div class="form-group">
-    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-    <div class="col-sm-6">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-    </div>
-  </div>-->
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-6">
-      <input  class="form-control" id="inputPassword3" placeholder="Company Name" name="companyName">
-    </div>
-  </div>
-<!--  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox"> Remember me
-        </label>
-      </div>
-    </div>
-  </div>-->
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Submit</button>
-    </div>
-  </div>
-</form>
+<!--<script>
+$(document).ready(function(){
+    $("#hide").click(function(){
+        $("#pa").hide();
+    });
+    $("#show").click(function(){
+        $("#pa").show();
+    });
+});
+</script>
+
+
+<p>If you click on the "Hide" button, I will disappear.</p>
+
+<div id="pa">
+    <h1>Hello World</h1>
+</div>
+
+<button id="hide">Hide</button>
+<button id="show">Show</button>                   -->
 
 
 
-        
-        <h1>Welcome to the Home page</h1>
-        <p>
-            Welcome to the Person Application </br>
-            <i>${message}</i> </br>
-            <a href ="${pageContext.request.contextPath}/person/create">Create a new person</a></br>
-                        <a href ="${pageContext.request.contextPath}/person/list">List all persons</a></br>
-                        <a href ="${pageContext.request.contextPath}/company/list">List all companies</a></br>
-
-            
-            
-        </p>
-        
-        
-        
-    </body>
-</html>
+<%@include file="footer.jsp" %>

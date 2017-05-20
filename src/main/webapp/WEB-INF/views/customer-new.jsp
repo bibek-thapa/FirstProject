@@ -12,7 +12,7 @@
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-6">
-      <input  class="form-control" id="inputPassword3" placeholder="Person Name" name="firstName">
+      <input  class="form-control" id="inputPassword3" placeholder="customer Name" name="firstName">
     </div>
     <br/>
     

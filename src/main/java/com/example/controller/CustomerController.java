@@ -6,9 +6,8 @@
 package com.example.controller;
 
 import com.example.DAOService.CompanyService;
-import com.example.DAOService.PersonDAOService;
 import com.example.data.Company;
-import com.example.data.Person;
+import com.example.data.Customer;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,28 +17,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.example.DAOService.CustomerDAOService;
 
 @Controller
-@RequestMapping(value = "/person")
-public class PersonController {
+@RequestMapping(value = "/customer")
+public class CustomerController {
 
     @Autowired
-    private PersonDAOService personDAOService;
+    private CustomerDAOService customerDAOService;
     
     @Autowired
     private CompanyService companyService;
     
+    
+    @RequestMapping(value="/form",method = RequestMethod.GET)
+    public ModelAndView form()
+    {
+        ModelAndView mav = new ModelAndView("/admin/customer/customer-form");
+    
+        return mav;
+        }
    
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView create(@ModelAttribute Person person, final RedirectAttributes redirectAttributes) {
+    public ModelAndView create(@ModelAttribute Customer customer, final RedirectAttributes redirectAttributes) {
         ModelAndView mav = new ModelAndView();
        
-        personDAOService.create(person);
+        customerDAOService.create(customer);
 
-        String message = "Person  " + person.getFirstName() + "  was succesfully created";
+        String message = "Customer  " + customer.getFirstName() + "  was succesfully created";
        
-        mav.setViewName("redirect:/");
+        mav.setViewName("redirect:/customer/list");
         redirectAttributes.addFlashAttribute("message", message);
         return mav;
     }
@@ -47,9 +55,9 @@ public class PersonController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView getAll() {
         ModelAndView mav = new ModelAndView("list");
-        List<Person> personList = personDAOService.findAll();
+        List<Customer> customerList = customerDAOService.findAll();
 
-        mav.addObject("personList", personList);
+        mav.addObject("customerList", customerList);
         return mav;
 
     }
@@ -57,8 +65,8 @@ public class PersonController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ModelAndView getById(final RedirectAttributes redirectAttributes, @PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView();
-        Person person = personDAOService.findById(id);
-        String message = "Person " + person.getFirstName() + " is listed";
+        Customer customer = customerDAOService.findById(id);
+        String message = "Customer " + customer.getFirstName() + " is listed";
         mav.setViewName("redirect:/");
         redirectAttributes.addFlashAttribute("message", message);
         return mav;
@@ -68,9 +76,9 @@ public class PersonController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteById(final RedirectAttributes redirectAttributes, @PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView();
-        Person person = personDAOService.delete(id);
-        String message = "Person " + person.getFirstName() + " is deleted";
-        mav.setViewName("redirect:/person/list");
+        Customer customer = customerDAOService.delete(id);
+        String message = "Customer " + customer.getFirstName() + " is deleted";
+        mav.setViewName("redirect:/customer/list");
         redirectAttributes.addFlashAttribute("message", message);
         return mav;
 
@@ -78,23 +86,23 @@ public class PersonController {
     
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editById(@PathVariable("id") Long id) {
-        ModelAndView mav = new ModelAndView("person-update");
-        Person person = personDAOService.findById(id);
+        ModelAndView mav = new ModelAndView("customer-update");
+        Customer customer = customerDAOService.findById(id);
         List<Company> companyList = companyService.getAll();
-        mav.addObject("person", person);
+        mav.addObject("customer", customer);
         mav.addObject("companyList", companyList);
         return mav;
 
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public ModelAndView editById(@PathVariable("id") Long id,@ModelAttribute Person person,final RedirectAttributes redirectAttributes) {
+    public ModelAndView editById(@PathVariable("id") Long id,@ModelAttribute Customer customer,final RedirectAttributes redirectAttributes) {
         ModelAndView mav = new ModelAndView();
-        personDAOService.update(person);
+        customerDAOService.update(customer);
         
-        String message = "Person " + person.getFirstName() + " is updated";
+        String message = "Customer " + customer.getFirstName() + " is updated";
         redirectAttributes.addFlashAttribute("message", message);
-        mav.setViewName("redirect:/person/list");
+        mav.setViewName("redirect:/customer/list");
         
         return mav;
 

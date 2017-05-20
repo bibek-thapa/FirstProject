@@ -21,22 +21,29 @@
 
             <tr>
                 <th>Id</th>
-                <th>First Name</th>
+                <th>Name</th>
                 <th>Company</th>
+                <th>Job Position</th>
+                <th>Contact No.</th>
+                
+                
                 <th>Edit</th>
                 <th>Delete</th>
 
             </tr>
 
             <tr>
-                <c:forEach var="person" items="${personList}">
-                    <td>${person.id}</td>
-                    <td>${person.firstName}</td>
-                    <td>${person.company.companyName}</td>
+                <c:forEach var="customer" items="${customerList}">
+                    <td>${customer.id}</td>
+                    <td>${customer.firstName} ${customer.lastName}</td>
+                     <td>${customer.companyName}</td>
+                   
+                    <td>${customer.jobPosition}</td>
+                    <td>${customer.contactNumber}</td>
                     <td>
-                        <a href="${SITE_URL}/person/edit/${person.id}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="${SITE_URL}/customer/edit/${customer.id}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                     </td>
-                    <td> <a href="${SITE_URL}/person/delete/${person.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure?')"></span></a></td>
+                    <td> <a href="${SITE_URL}/customer/delete/${customer.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure?')"></span></a></td>
                     </br>
 
                 </tr>

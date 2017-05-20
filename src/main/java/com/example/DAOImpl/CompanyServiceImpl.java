@@ -57,8 +57,6 @@ public class CompanyServiceImpl implements CompanyService {
 
         Company toUpdate = companyRepository.findOne(c.getId());
         toUpdate.setCompanyName(c.getCompanyName());
-        
-       
         return companyRepository.save(toUpdate);
 
     }
