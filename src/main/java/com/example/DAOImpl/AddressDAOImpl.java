@@ -9,11 +9,11 @@ import com.example.data.Address;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.DAOService.AddressDAOService;
 import com.example.repository.AddressRepository;
+import com.example.DAOService.AddressDAO;
 
 @Service
-public class AddressServiceImpl implements AddressDAOService {
+public class AddressDAOImpl implements AddressDAO {
 
     @Autowired
     private AddressRepository addressRepository;
@@ -39,7 +39,7 @@ public class AddressServiceImpl implements AddressDAOService {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Address update(Address c) {
+    public Address update(Address c,Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

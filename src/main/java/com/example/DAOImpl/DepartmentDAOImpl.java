@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DepartmentDAOServiceImpl implements DepartmentDAO{
+public class DepartmentDAOImpl implements DepartmentDAO{
     
     @Resource
     private DepartmentRepository departmentRepository;
@@ -42,7 +42,7 @@ public class DepartmentDAOServiceImpl implements DepartmentDAO{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Department update(Department c) {
+    public Department update(Department c,Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

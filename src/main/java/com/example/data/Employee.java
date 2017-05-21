@@ -2,9 +2,11 @@ package com.example.data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -28,6 +30,21 @@ public class Employee {
 
     @Column(name = "EMPLOYEE_CONTACTNO", nullable = false)
     private Long contactNumber;
+    
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "EMPLOYEESALARY_ID")
+    private EmployeeSalary employeeSalary;
+
+    public EmployeeSalary getEmployeeSalary() {
+        return employeeSalary;
+    }
+
+    public void setEmployeeSalary(EmployeeSalary employeeSalary) {
+        this.employeeSalary = employeeSalary;
+    }
+    
+    
 
     public Long getId() {
         return id;

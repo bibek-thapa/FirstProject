@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Dell
  */
-public class TenantDAOServiceImpl  implements TenantDAO{
+public class TenantDAOImpl  implements TenantDAO{
 
     public List<Tenant> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -31,7 +31,7 @@ public class TenantDAOServiceImpl  implements TenantDAO{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Tenant update(Tenant c) {
+    public Tenant update(Tenant c,Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

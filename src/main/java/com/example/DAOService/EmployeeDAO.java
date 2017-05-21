@@ -5,12 +5,12 @@
  */
 package com.example.DAOService;
 
-import com.example.data.Address;
+import com.example.data.Employee;
 
 /**
  *
  * @author Dell
  */
-public interface AddressDAOService extends GenericDAO<Address>{
+public interface EmployeeDAO extends GenericDAO<Employee>{
     
 }

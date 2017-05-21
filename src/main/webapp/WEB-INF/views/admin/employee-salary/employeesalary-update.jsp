@@ -3,13 +3,15 @@
 
 <h1 class="text-center">  Employee Salary Details </h1>
 <br/>
-<form class="form-horizontal" method="POST" action="${SITE_URL}/employeeSalary/create">
+<form class="form-horizontal" method="post" action="${SITE_URL}/employeeSalary/edit/${employeeSalary.id}">
 
+    <input type="hidden" name="id" value="${employeeSalary.id}">
+    
     <div class="form-group">
         <label for="EmployeePosition" class="col-sm-3 control-label">Employee Position</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" 
-                   placeholder="Employee Position" name="employeePosition">
+                   value="${employeeSalary.employeePosition}" name="employeePosition">
         </div>
     </div>
 
@@ -17,7 +19,7 @@
         <label for="Pay Rate" class="col-sm-3 control-label">Pay Rate</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" 
-                   placeholder="Pay Rate"  name="payRate">
+                   value="${employeeSalary.payRate}"  name="payRate">
         </div>
     </div>
 
@@ -42,12 +44,5 @@
         <button type="submit" class="btn btn-primary btn-md"><span
                 class="glyphicon glyphicon-send"></span>&nbsp;Submit</button>
     </div>
-
-
-
-
-
-
 </form>        
-
 <%@include file = "../../footer.jsp" %>

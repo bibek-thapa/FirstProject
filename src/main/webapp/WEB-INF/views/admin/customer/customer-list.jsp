@@ -1,22 +1,12 @@
-<%-- 
-    Document   : List
-    Created on : May 1, 2017, 10:51:50 PM
-    Author     : Dell
---%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
-<%@include file ="header.jsp" %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>JSP Page</title>
-    </head>
-    <body>
+<%@include file ="../../header.jsp" %>
 
 
 
+        <h2 class="text-center"> CUSTOMER DETAILS </h2>
         <table class="table table-hover  table-striped">
 
             <tr>
@@ -59,5 +49,4 @@
 
         <i>${message}</i>
 
-    </body>
-</html>
+ <%@include file ="../../footer.jsp" %>  

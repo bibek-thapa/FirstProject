@@ -22,7 +22,13 @@ public class EmployeeSalary {
     private Long payRate;
 
     @Column(name = "EMPLOYEE_BONUS", nullable = false)
-    private Long bonus;
+    private float bonus;
+
+   
+    
+    
+
+    
 
     public Long getId() {
         return id;
@@ -44,11 +50,12 @@ public class EmployeeSalary {
         this.payRate = payRate;
     }
 
-    public Long getBonus() {
+    public float getBonus() {
+       bonus = (float)(payRate * 0.1);
         return bonus;
     }
 
-    public void setBonus(Long bonus) {
+    public void setBonus(float bonus) {
         this.bonus = bonus;
     }
 

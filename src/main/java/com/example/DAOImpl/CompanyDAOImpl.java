@@ -5,62 +5,54 @@
  */
 package com.example.DAOImpl;
 
-import com.example.DAOService.CompanyService;
 import com.example.data.Company;
 import com.example.repository.CompanyRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.DAOService.CompanyDAO;
 
 @Service
 
-public class CompanyServiceImpl implements CompanyService {
+public class CompanyDAOImpl implements CompanyDAO {
 
     @Autowired
     private CompanyRepository companyRepository;
 
-    
     public List<Company> getAll() {
         return companyRepository.findAll();
     }
 
-    
     public Company insert(Company c) {
-        Company comp = new Company();
-
-        comp.setCompanyName(c.getCompanyName());
-        return companyRepository.save(comp);
+       
+        c.setCompanyName(c.getCompanyName());
+        return companyRepository.save(c);
 
     }
 
-   
     public Company getById(Long id) {
         Company comp = companyRepository.findOne(id);
-        
+
         return comp;
     }
 
     public Company delete(Long id) {
-        Company toDelete =  companyRepository.findOne(id);
+        Company toDelete = companyRepository.findOne(id);
         companyRepository.delete(toDelete);
         return toDelete;
 
     }
 
-   
     public Company getByName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-  
-    public Company update(Company c) {
 
-        Company toUpdate = companyRepository.findOne(c.getId());
+    public Company update(Company c, Long id) {
+
+        Company toUpdate = companyRepository.findOne(id);
         toUpdate.setCompanyName(c.getCompanyName());
         return companyRepository.save(toUpdate);
 
     }
-
-    
 
 }

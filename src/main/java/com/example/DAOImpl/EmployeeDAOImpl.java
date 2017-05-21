@@ -5,29 +5,32 @@
  */
 package com.example.DAOImpl;
 
-import com.example.DAOService.EmployeeDAOService;
 import com.example.data.Employee;
 import com.example.repository.EmployeeRepository;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import com.example.DAOService.EmployeeDAO;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeDAOService {
+public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Resource
     private EmployeeRepository employeeRepository;
+    
+    
 
     public List<Employee> getAll() {
         return employeeRepository.findAll();
     }
 
     public Employee insert(Employee e) {
-       
+
         e.setFirstName(e.getFirstName());
         e.setLastName(e.getLastName());
         e.setAddress(e.getAddress());
         e.setContactNumber(e.getContactNumber());
+        e.setEmployeeSalary(e.getEmployeeSalary());
         return employeeRepository.save(e);
     }
 
@@ -37,11 +40,20 @@ public class EmployeeServiceImpl implements EmployeeDAOService {
     }
 
     public Employee delete(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Employee toDelete = employeeRepository.findOne(id);
+        employeeRepository.delete(toDelete);
+        return toDelete;
     }
 
-    public Employee update(Employee e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Employee update(Employee e,Long id) {
+        Employee toUpdate = employeeRepository.findOne(id);
+        toUpdate.setFirstName(e.getFirstName());
+        toUpdate.setLastName(e.getLastName());
+        toUpdate.setAddress(e.getAddress());
+        toUpdate.setContactNumber(e.getContactNumber());
+        toUpdate.setEmployeeSalary(e.getEmployeeSalary());
+
+        return employeeRepository.save(toUpdate);
     }
 
     public Employee getByName(String name) {

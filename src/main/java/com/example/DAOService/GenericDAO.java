@@ -17,7 +17,7 @@ public interface GenericDAO <T>{
    public T insert(T c);
     public T getById(Long id);
     public T delete(Long id);
-    public T update(T c);
+    public T update(T c,Long id);
     public T getByName(String name);
     
 }
