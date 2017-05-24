@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.example.controller;
 
 import com.example.data.Company;
@@ -42,7 +38,7 @@ public class CustomerController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ModelAndView create(@ModelAttribute Customer customer, final RedirectAttributes redirectAttributes) {
         ModelAndView mav = new ModelAndView();
-       
+       customer.setCompanyName("Google");
         customerDAO.insert(customer);
 
         String message = "Customer  " + customer.getFirstName() + "  was succesfully created";

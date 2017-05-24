@@ -5,7 +5,7 @@
 
 <h1 class="text-center">  Employee Details </h1>
 <br/>
-<form class="form-horizontal" method="POST" action="${SITE_URL}/employee/create">
+<form class="form-horizontal" method="post" action="${SITE_URL}/employee/create">
 
     <div class="form-group">
         <label for="FirstName" class="col-sm-3 control-label">First Name</label>
@@ -41,23 +41,26 @@
                    placeholder="Enter the Contact Number" name="contactNumber">
         </div>
     </div>
-    
-    
-
-
-
+        <div class="form-group">
+        <label for="Employee Position" class="col-sm-3 control-label">Employee Position</label>
+        
+        <div class="col-sm-8"  >
+        <select name="employeeSalary.id"  class="form-control"  >
+            <option selected disabled hidden value="">Select the position</option>
+            <c:forEach var="employeeSalary" items="${employeeSalaryList}">
+               
+            <option value="${employeeSalary.id}">${employeeSalary.employeePosition}</option>
+            
+            </c:forEach>
+        </select>
+        
+    </div>
+    </div>
 
     <div class="clearfix">&nbsp;</div>
     <div class="col-sm-12 text-center">
         <button type="submit" class="btn btn-primary btn-md"><span
                 class="glyphicon glyphicon-send"></span>&nbsp;Submit</button>
     </div>
-
-
-
-
-
-
 </form>        
-
 <%@include file = "../../footer.jsp" %>

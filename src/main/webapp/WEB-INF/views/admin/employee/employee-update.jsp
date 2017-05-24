@@ -40,7 +40,20 @@
         </div>
     </div>
     <br/>
+    
+    <div class="form-group">
+        <label for="Employee Position" class="col-sm-3 control-label">Employee Position</label>
+       <div class="col-sm-8">
+           <select class="form-control" name="employeeSalary.id">
+              <option  value="${employee.employeeSalary.id}">Select the position</option>
 
+               <c:forEach var="employeeSalary" items="${employeeSalaryList}">
+                   
+                   <option value="${employeeSalary.id}">${employeeSalary.employeePosition}</option>
+               </c:forEach>
+               
+               
+           </select>
 
 
 

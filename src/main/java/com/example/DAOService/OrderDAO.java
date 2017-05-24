@@ -5,17 +5,12 @@
  */
 package com.example.DAOService;
 
-import com.example.data.EmployeeSalary;
-import java.io.Serializable;
-import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.data.Order;
 
 /**
  *
  * @author Dell
  */
-public interface EmployeeSalaryDAO extends GenericDAO<EmployeeSalary> {
-
-    
+public interface OrderDAO extends GenericDAO<Order> {
     
 }

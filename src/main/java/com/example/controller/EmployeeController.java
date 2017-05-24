@@ -5,8 +5,6 @@
  */
 package com.example.controller;
 
-import com.example.data.Company;
-import com.example.data.Employee;
 import com.example.data.Employee;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.DAOService.EmployeeDAO;
 import com.example.DAOService.EmployeeSalaryDAO;
 import com.example.data.EmployeeSalary;
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.ui.Model;
 
 @Controller
 @RequestMapping(value="/employee")
@@ -27,20 +28,18 @@ public class EmployeeController {
     
     @Autowired
     private EmployeeDAO employeeDAO;
-//    
-//    @Autowired
-//    private EmployeeSalaryDAO employeeSalaryDAO;
+    
+    @Autowired
+    private EmployeeSalaryDAO employeeSalaryDAO;
     
     
     
     @RequestMapping(value="/form")
-    public ModelAndView form()
+    public ModelAndView form(Model model)
     {
         ModelAndView mav = new ModelAndView("/admin/employee/employee-form");
-//        List<EmployeeSalary> employeeSalaryList = employeeSalaryDAO.getAll();
-//        mav.addObject("employeeSalaryList",employeeSalaryList );
-      return mav;
-    
+        mav.addObject("employeeSalaryList", employeeSalaryDAO.getAll());
+        return mav;
     }
     
     
@@ -75,6 +74,8 @@ public class EmployeeController {
         List<Employee> employeeList = employeeDAO.getAll();
         mav.addObject("employee", employee);
         mav.addObject("employeeList", employeeList);
+        mav.addObject("employeeSalaryList", employeeSalaryDAO.getAll());
+
         return mav;
 
     }
@@ -101,6 +102,8 @@ public class EmployeeController {
         return mav;
     
     }
+    
+    
     
     
 

@@ -3,19 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.DAOService;
+package com.example.repository;
 
-import com.example.data.EmployeeSalary;
-import java.io.Serializable;
-import java.util.List;
+import com.example.data.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Dell
  */
-public interface EmployeeSalaryDAO extends GenericDAO<EmployeeSalary> {
-
-    
+public interface OrderRepository extends JpaRepository<Order, Long> {
     
 }

@@ -1,5 +1,6 @@
 package com.example.data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,8 +33,8 @@ public class Employee {
     private Long contactNumber;
     
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "EMPLOYEESALARY_ID")
+    @ManyToOne
+    @JoinColumn(name = "EMPLOYEESALARY_ID",nullable=false)
     private EmployeeSalary employeeSalary;
 
     public EmployeeSalary getEmployeeSalary() {
