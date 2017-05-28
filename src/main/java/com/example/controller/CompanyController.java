@@ -54,7 +54,7 @@ public class CompanyController {
     public ModelAndView editcompany(@PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView("admin/company/company-update");
         Company company = companyDAO.getById(id);
-        mav.addObject("company", company);
+       // mav.addObject("company", company);
         return mav;
     }
 

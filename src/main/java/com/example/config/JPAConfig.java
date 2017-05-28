@@ -8,10 +8,13 @@ package com.example.config;
 import java.util.Properties;
 
 import javax.sql.DataSource;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -55,7 +58,7 @@ public class JPAConfig {
     private Properties additionalProperties() {
 
         Properties properties = new Properties();  
-  properties.setProperty("hibernate.hbm2ddl.auto", "update");
+ properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
          properties.setProperty("show_sql", "true");
          properties.setProperty("hibernate.format_sql", "true");
@@ -71,7 +74,14 @@ public class JPAConfig {
         return transactionManager;
     }
     
-    
+//    	@Bean
+//       public HibernateTransactionManager transactionManager(SessionFactory s) {
+//       HibernateTransactionManager txManager = new HibernateTransactionManager();
+//       txManager.setSessionFactory(s);
+//       return txManager;
+//    }
+//    
+//    
    
 
 }

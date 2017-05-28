@@ -1,7 +1,6 @@
 
 package com.example.controller;
 
-import com.example.data.Company;
 import com.example.data.Customer;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.example.DAOService.CompanyDAO;
 import com.example.DAOService.CustomerDAO;
 
 @Controller
@@ -22,23 +20,20 @@ public class CustomerController {
     @Autowired
     private CustomerDAO customerDAO;
     
-    @Autowired
-    private CompanyDAO companyService;
+   
     
     
     @RequestMapping(value="/form",method = RequestMethod.GET)
     public ModelAndView form()
-    {
-        ModelAndView mav = new ModelAndView("/admin/customer/customer-form");
-    
-        return mav;
-        }
+    {    ModelAndView mav = new ModelAndView("/admin/customer/customer-form");
+         return mav;
+    }
    
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ModelAndView create(@ModelAttribute Customer customer, final RedirectAttributes redirectAttributes) {
         ModelAndView mav = new ModelAndView();
-       customer.setCompanyName("Google");
+      
         customerDAO.insert(customer);
 
         String message = "Customer  " + customer.getFirstName() + "  was succesfully created";
@@ -84,9 +79,9 @@ public class CustomerController {
     public ModelAndView editById(@PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView("/admin/customer/customer-update");
         Customer customer = customerDAO.getById(id);
-        List<Company> companyList = companyService.getAll();
+       // List<Company> companyList = companyService.getAll();
         mav.addObject("customer", customer);
-        mav.addObject("companyList", companyList);
+       // mav.addObject("companyList", companyList);
         return mav;
 
     }

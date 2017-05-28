@@ -2,9 +2,17 @@ package com.example.controller;
 
 import com.example.DAOService.CustomerDAO;
 import com.example.DAOService.OrderDAO;
+import com.example.DAOService.ProductDAO;
 import com.example.data.Order;
+import java.util.Hashtable;
+import java.util.Map;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,21 +29,49 @@ public class OrderController {
     @Autowired
     private CustomerDAO customerDAO;
     
+    @Autowired
+    private ProductDAO productDAO;
+    
+    @Autowired
+    private MessageSource messageSource;
+     
     
     
-    @RequestMapping(value = "/form")
+    @RequestMapping(value = "/create")
     public ModelAndView form() {
-        ModelAndView mav = new ModelAndView("/admin/order/order-form");
-        mav.addObject("customerList", customerDAO.getAll());
+         
+        Order order = new Order();
+      
+      //  model.put("orderForm", order);
+        //return "admin/order/order-form";
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/admin/order/order-form");
+        mav.addObject("orderForm", order);
+        mav.addObject("productList", productDAO.getAll());
+
         return mav;
+        
+        
+//        mav.addObject("customerList", customerDAO.getAll());
+//        return mav;
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView create(@ModelAttribute Order order) {
+    public ModelAndView create(@Valid @ModelAttribute("orderForm") Order orderForm,BindingResult result) {
         ModelAndView mav = new ModelAndView();
-        orderDAO.insert(order);
-        mav.setViewName("redirect:/order/list");
-        return mav;
+        mav.addObject("productList", productDAO.getAll());
+        if(result.hasErrors())
+        {
+          
+          mav.setViewName( "/admin/order/order-form");
+         
+        }else{
+        
+        orderDAO.insert(orderForm);
+           mav.setViewName( "redirect:/order/list");
+        }
+         
+      return mav;
         
     }
     

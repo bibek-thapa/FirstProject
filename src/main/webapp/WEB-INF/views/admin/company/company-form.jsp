@@ -5,13 +5,13 @@
 <br/>
 <form class="form-horizontal" method="POST" action="${SITE_URL}/company/create">
 
-    <div class="form-group">
+<!--    <div class="form-group">
         <label  class="col-sm-3 control-label">Company Name</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" 
                    placeholder="Company Name" name="companyName">
         </div>
-    </div>
+    </div>-->
 
 
 

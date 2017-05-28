@@ -5,7 +5,6 @@
  */
 package com.example.data;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Customer")
-public class Customer implements Serializable {
+public class Customer  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,18 +26,14 @@ public class Customer implements Serializable {
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
-    @Column(name = "JobPosition", nullable = false)
+    @Column(name = "JOB_POSITION", nullable = false)
     private String jobPosition;
 
-    @Column(name = "CompanyName", nullable = false)
+    @Column(name = "COMPANY_NAME", nullable = false)
     private String companyName;
 
     @Column(name = "CUSTOMER_CONTACTNO", nullable = false)
     private Long contactNumber;
-
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "COMPANY_ID", nullable = false)
-//    private Company company;
 
     public String getLastName() {
         return lastName;
@@ -64,6 +59,8 @@ public class Customer implements Serializable {
         this.companyName = companyName;
     }
 
+    
+
     public Long getContactNumber() {
         return contactNumber;
     }
@@ -75,13 +72,6 @@ public class Customer implements Serializable {
     
     
 
-//    public Company getCompany() {
-//        return company;
-//    }
-//
-//    public void setCompany(Company company) {
-//        this.company = company;
-//    }
 
     public String getFirstName() {
         return firstName;

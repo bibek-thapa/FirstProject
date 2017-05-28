@@ -5,7 +5,6 @@ import com.example.data.Order;
 import com.example.repository.OrderRepository;
 import java.util.List;
 import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,11 +17,12 @@ public class OrderDAOImpl implements OrderDAO {
         return orderRepository.findAll();
     }
 
-    public Order insert(Order c) {
-        c.setOrderQuantity(c.getOrderQuantity());
-        c.setCreatedTime(c.getCreatedTime());
-//        c.setCustomer(c.getCustomer());
-        return orderRepository.save(c);
+    public Order insert(Order order) {
+        order.setOrderQuantity(order.getOrderQuantity());
+        order.setCreatedTime(order.getCreatedTime());
+        order.setUpdatedTime(order.getUpdatedTime());
+        order.setProduct(order.getProduct());
+        return orderRepository.save(order);
 
     }
 
