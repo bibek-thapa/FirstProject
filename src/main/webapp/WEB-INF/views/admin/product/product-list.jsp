@@ -1,6 +1,8 @@
 <%@include file="../../header.jsp" %>
 <h2 class="text-center" >Product Details</h2>
 <div class="clearfix">&nbsp;</div>
+
+<div class="container">
 <table class="table table-striped table-responsive">
     <tr>
         <th>Id</th>
@@ -24,6 +26,7 @@
     
     
 </table>
+</div>
 
 
 

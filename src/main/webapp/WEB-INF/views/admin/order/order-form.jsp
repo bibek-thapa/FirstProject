@@ -9,14 +9,14 @@
 
 
   <h2 class="text-center">Add Order Data</h2>
-  
+  <div class="container">
   <form:form class="form-horizontal" method="POST" action="${SITE_URL}/order/create"  modelAttribute="orderForm" >
      
             <div class="form-group">
           <!--<label class="col-sm-3 control-label" for="orderQuantity">Order Quantity</label>-->
           <form:label cssClass="col-sm-3 control-label" path="orderQuantity">Order Quantity</form:label>
           <div class="col-sm-3">
-              <form:input path="orderQuantity"  cssClass="form-control" />
+              <form:input path="orderQuantity" cssClass="form-control" />
           </div>
           
           <div class="has-error">
@@ -27,14 +27,32 @@
           <div class="form-group">
               <label class="col-sm-3 control-label">Product</label>
               <div class="col-sm-8">
-                  <form:select path="product" items="${productList}" itemValue="id" itemLabel="productName" class="form-control">
-                  </form:select>
+                    <form:select path="product.id" class="form-control">
+            		<form:option value="" label="--Please Select"/>
+            		<form:options items="${productList}" itemValue="id" itemLabel="productName"/>
+                    </form:select>
+                  
                   <div class="has-error">
-                  <form:errors path="product" cssClass="error"/>
+                     <form:errors path="product.id" cssClass="error"/>
                   </div> 
               </div>   
-              
           </div>
+                  
+                  <div class="form-group">
+              <label class="col-sm-3 control-label">Customer</label>
+              <div class="col-sm-8">
+                    <form:select path="customer.id" class="form-control">
+            		<form:option value="" label="--Please Select"/>
+            		<form:options items="${customerList}" itemValue="id" itemLabel="firstName"/>
+                    </form:select>
+                  
+                  <div class="has-error">
+                     <form:errors path="customer.id" cssClass="error"/>
+                  </div> 
+              </div>   
+          </div>
+                  
+             
           
           <div class="clearfix">&nbsp;</div>
           
@@ -42,6 +60,7 @@
         <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span>Send</button>
 
     </div>
+  </div>
       
   </form:form>
   <%@include file="../../footer.jsp" %>

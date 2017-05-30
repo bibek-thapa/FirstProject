@@ -4,6 +4,7 @@ import com.example.DAOService.CustomerDAO;
 import com.example.DAOService.OrderDAO;
 import com.example.DAOService.ProductDAO;
 import com.example.data.Order;
+import com.example.data.Product;
 import java.util.Hashtable;
 import java.util.Map;
 import javax.validation.Valid;
@@ -22,94 +23,75 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value = "/order")
 public class OrderController {
-    
+
     @Autowired
     private OrderDAO orderDAO;
-    
+
     @Autowired
     private CustomerDAO customerDAO;
-    
+
     @Autowired
     private ProductDAO productDAO;
-    
+
     @Autowired
     private MessageSource messageSource;
-     
-    
-    
+
     @RequestMapping(value = "/create")
-    public ModelAndView form() {
-         
+    public ModelAndView form(@ModelAttribute("orderForm") Order orderForm) {
         Order order = new Order();
-      
-      //  model.put("orderForm", order);
-        //return "admin/order/order-form";
+        
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/admin/order/order-form");
         mav.addObject("orderForm", order);
         mav.addObject("productList", productDAO.getAll());
-
+        mav.addObject("customerList",customerDAO.getAll());
         return mav;
-        
-        
-//        mav.addObject("customerList", customerDAO.getAll());
-//        return mav;
     }
-    
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView create(@Valid @ModelAttribute("orderForm") Order orderForm,BindingResult result) {
+    public ModelAndView create(@Valid @ModelAttribute("orderForm") Order orderForm, BindingResult result) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("productList", productDAO.getAll());
-        if(result.hasErrors())
-        {
-          
-          mav.setViewName( "/admin/order/order-form");
-         
-        }else{
-        
-        orderDAO.insert(orderForm);
-           mav.setViewName( "redirect:/order/list");
+       mav.addObject("productList", productDAO.getAll());
+        mav.addObject("customerList",customerDAO.getAll());
+        if (result.hasErrors()) {
+            mav.setViewName("/admin/order/order-form");
+        } else {
+            //Product product = productDAO.getById(orderForm.getProduct().getId());
+            //orderForm.setProduct(product);
+            orderDAO.insert(orderForm);
+            mav.setViewName("redirect:/order/list");
         }
-         
-      return mav;
-        
+        return mav;
     }
-    
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView list() {
         ModelAndView mav = new ModelAndView("/admin/order/order-list");
         mav.addObject("orderList", orderDAO.getAll());
         return mav;
-        
     }
-    
-    @RequestMapping(value = "/edit/{id}",method = RequestMethod.GET)
-    public ModelAndView edit(@PathVariable("id")Long id)
-    {
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView edit(@PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView("/admin/order/order-update");
         Order order = orderDAO.getById(id);
         mav.addObject("order", order);
         return mav;
     }
-    
-    @RequestMapping(value="/edit/{id}",method = RequestMethod.POST)
-    public ModelAndView edit(@PathVariable("id")Long id , @ModelAttribute Order order)
-    {
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    public ModelAndView edit(@PathVariable("id") Long id, @ModelAttribute Order order) {
         ModelAndView mav = new ModelAndView();
         orderDAO.update(order, id);
         mav.setViewName("redirect:/order/list");
         return mav;
     }
-    
-    @RequestMapping(value="/delete/{id}")
-    public ModelAndView delete(@PathVariable("id")Long id)
-    {
+
+    @RequestMapping(value = "/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView();
         orderDAO.delete(id);
         mav.setViewName("redirect:/order/list");
         return mav;
-    
-    
     }
-    
 }

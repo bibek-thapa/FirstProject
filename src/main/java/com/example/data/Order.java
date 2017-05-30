@@ -35,26 +35,27 @@ public class Order {
     private LocalDate updatedTime;
 
    
-    @NotNull
+    @NotNull(message="No null")
     @Column(name = "ORDER_QTY",nullable = false)
     private Long orderQuantity;
     
-//    @ManyToOne
-//    @JoinColumn(name = "CUSTOMER_ID",nullable = false)
-//    private Customer customer;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "CUSTOMER_ID",nullable = false)
+    private Customer customer;
     
-    
-    @ManyToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @ManyToOne
     @JoinColumn(name = "PRODUCT_ID",nullable=false)
     private Product product;
 
-//    public Customer getCustomer() {
-//        return customer;
-//    }
-//
-//    public void setCustomer(Customer customer) {
-//        this.customer = customer;
-//    }
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public Product getProduct() {
         return product;

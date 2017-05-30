@@ -1,13 +1,11 @@
 
 package com.example.data;
 
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,10 +22,11 @@ public class Product {
     
     @Column(name = "PRICE_PER_UNIT",nullable = false)
     private Double pperUnit;
-    
-    
 
-    
+    public void setId(Long id) {
+        this.id = id;
+    }
+        
     public Long getId() {
         return id;
     }
