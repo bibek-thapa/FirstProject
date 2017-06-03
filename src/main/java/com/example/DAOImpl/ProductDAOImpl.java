@@ -5,6 +5,7 @@ import com.example.DAOService.ProductDAO;
 import com.example.data.Product;
 import com.example.repository.ProductRepository;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +15,28 @@ public class ProductDAOImpl implements ProductDAO {
     @Autowired
     private ProductRepository productRepository;
     
+    Logger logger = Logger.getLogger(ProductDAOImpl.class);
+    
     public List<Product> getAll() {
         return productRepository.findAll();
     }
 
     public Product insert(Product product) {
-        product.setProductName(product.getProductName());
-        product.setPperUnit(product.getPperUnit());
-        return productRepository.save(product);
-
+        logger.info("In the insert part of the ProductDAO Implementation");
+         Product product1 = productRepository.findByproductCode(product.getProductCode());
+        if(product1!=null)
+        {
+            logger.info("Product code already exists in the database");
+        }
+        else{
+          product = productRepository.save(product);
+          logger.info("Product "+product.getProductName()+" is successfully created");
+        }
+        
+        return product;
+     
+        
+        
     }
 
     public Product getById(Long id) {

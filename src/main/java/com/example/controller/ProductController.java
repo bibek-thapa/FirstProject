@@ -7,26 +7,70 @@ package com.example.controller;
 
 import com.example.DAOService.ProductDAO;
 import com.example.data.Product;
+import java.io.IOException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.validation.Valid;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value="/product")
-public class ProductController {
+
+public class ProductController  {
     @Autowired
     private ProductDAO productDAO;
     
-    @RequestMapping(value="/form")
-    public ModelAndView form()
-    {
+     private Logger logger = Logger.getLogger(ProductController.class);
+    
+    @RequestMapping(value="/create")
+    public ModelAndView create()
+    {   Product product = new Product();
         ModelAndView mav = new ModelAndView("/admin/product/product-form");
+        mav.addObject("productForm",product);
+        logger.info("In the Create part of the Product Controller");
         return mav;
     }   
+    
+    @RequestMapping(value = "/create",method = RequestMethod.POST)
+   
+    public ModelAndView create(@Valid @ModelAttribute("productForm")Product product,BindingResult result,@RequestPart("productImage")MultipartFile productImage ) 
+    {
+        ModelAndView mav = new ModelAndView();
+        if(result.hasErrors())
+        {
+            
+       mav.setViewName("/admin/product/product-form");
+       
+        }
+        else{
+           
+            try{
+            byte[] productbytes= productImage.getBytes();
+            product.setProductImage(productbytes);
+            }catch(IOException ioe)
+            {
+                logger.error("Image cannot be loaded");
+                
+            }
+        productDAO.insert(product);
+        
+       logger.info("Product named " + product.getProductName() + " is created");
+        mav.setViewName("redirect:/product/list");
+        
+        }
+        return mav;
+    
+    }
     
     @RequestMapping(value="/list")
     public ModelAndView list()
@@ -36,15 +80,6 @@ public class ProductController {
         return mav;
     }
     
-    @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public ModelAndView create(@ModelAttribute Product product)
-    {
-        ModelAndView mav = new ModelAndView();
-        productDAO.insert(product);
-        mav.setViewName("redirect:/product/list");
-        return mav;
-    
-    }
     
     @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable("id")Long id)

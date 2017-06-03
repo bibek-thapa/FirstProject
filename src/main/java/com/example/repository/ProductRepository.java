@@ -6,7 +6,6 @@
 package com.example.repository;
 
 import com.example.data.Product;
-import java.io.Serializable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -15,4 +14,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ProductRepository extends JpaRepository<Product, Long>{
     
+public Product findByproductCode(String productCode);
+
 }

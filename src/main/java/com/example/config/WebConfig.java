@@ -1,5 +1,6 @@
 package com.example.config;
 
+import javax.servlet.annotation.MultipartConfig;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -7,6 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -47,18 +51,34 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         
        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
        messageSource.setBasename("messages");
-       return messageSource;
-        
-        
+       return messageSource; 
         
         /**  Working Code using RelodableResourceBundleMessageSource
         * ReloadableResourceBundleMessageSource  messageSource = new ReloadableResourceBundleMessageSource();
         *messageSource.setBasename("/WEB-INF/files/messages");
         *return messageSource; 
-        */ 
-       
-       
-    }
+        */ }
+//   @Bean
+//   public CommonsMultipartResolver multipartResolver()
+//   {
+//       CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+//       
+//       return commonsMultipartResolver;
+//   
+//   
+//   }
+    
+    
+   @Bean
+   public MultipartResolver multipartReslover()
+   {
+       return new StandardServletMultipartResolver();
+   }
+    
+    
+    
+    
+            
 
     
         

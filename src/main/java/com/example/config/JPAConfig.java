@@ -75,6 +75,8 @@ public class JPAConfig {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
+        
+        
     }
     
    

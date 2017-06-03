@@ -3,8 +3,8 @@ package com.example.data;
 
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,11 +16,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "ORDER_TBL")
-public class Order {
+public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,12 +38,12 @@ public class Order {
     @Column(name = "ORDER_QTY",nullable = false)
     private Long orderQuantity;
     
-    @NotNull
+    
     @ManyToOne
     @JoinColumn(name = "CUSTOMER_ID",nullable = false)
     private Customer customer;
     
-    @NotNull
+   
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID",nullable=false)
     private Product product;

@@ -25,12 +25,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     public Employee insert(Employee e) {
-
-        e.setFirstName(e.getFirstName());
-        e.setLastName(e.getLastName());
-        e.setAddress(e.getAddress());
-        e.setContactNumber(e.getContactNumber());
-        e.setEmployeeSalary(e.getEmployeeSalary());
         return employeeRepository.save(e);
     }
 

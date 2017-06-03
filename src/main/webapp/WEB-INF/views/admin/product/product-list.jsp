@@ -8,6 +8,7 @@
         <th>Id</th>
         <th>Product Name</th>
         <th>Price Per Unit</th>
+        <th>Image</th>
         <th>Edit</th>
         <th>Delete</th>
         
@@ -17,6 +18,7 @@
         <td>${product.id}</td>
         <td>${product.productName}</td>
         <td>${product.pperUnit}</td>
+        <td><img style="vertical-align: bottom;" class="img-responsive img-rounded" src="${SITE_URL}/imageDisplay?id=${product.id}" alt="ProductImage ${product.productCode}" width="120" height="80"/></td>
         <td><a href="${SITE_URL}/product/edit/${product.id}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a></td>
         <td><a href="${SITE_URL}/product/delete/${product.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
 
