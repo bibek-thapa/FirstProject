@@ -22,6 +22,7 @@ private static final String DISPATCHER_SERVLET_NAME = "dispatcher1";
 
 		ServletRegistration.Dynamic servlet = servletContext.addServlet(DISPATCHER_SERVLET_NAME,
 				new DispatcherServlet(ctx));
+              
                 servlet.setMultipartConfig(new MultipartConfigElement("D:/tmp/uploads", 2097152, 4194304, 0));
 		servlet.addMapping("/");
 		servlet.setLoadOnStartup(1);

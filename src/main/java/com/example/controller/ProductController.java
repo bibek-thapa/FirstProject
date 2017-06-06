@@ -108,4 +108,13 @@ public class ProductController  {
     
     }
     
+    @RequestMapping(value="/view",method = RequestMethod.GET)
+    public ModelAndView view(ModelAndView mav,@RequestParam("id")Long id)
+    {
+        mav.setViewName("/admin/product/product-view");
+        mav.addObject("product", productDAO.getById(id));
+        return mav;
+    
+    }
+    
     }
