@@ -12,6 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Customer")
@@ -21,20 +24,53 @@ public class Customer implements Serializable  {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    @NotEmpty
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
+    @NotEmpty
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
-    @Column(name = "JOB_POSITION", nullable = false)
+    
+    @Column(name = "JOB_POSITION")
     private String jobPosition;
 
-    @Column(name = "COMPANY_NAME", nullable = false)
+    
+    @Column(name = "COMPANY_NAME")
     private String companyName;
 
+    @NotNull
     @Column(name = "CUSTOMER_CONTACTNO", nullable = false)
     private Long contactNumber;
+    
+    @NotEmpty
+    @Column(name = "CUSTOMER_ADDRESS", nullable = false)
+    private String address;
+    
+    @Email
+    @NotEmpty
+    @Column(name = "EMAIL_ADDRESS", nullable = false)
+    private String emailAddress;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+    
+    
+    
 
     public String getLastName() {
         return lastName;

@@ -18,11 +18,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     public Order insert(Order order) {
-//        order.setOrderQuantity(order.getOrderQuantity());
-//        order.setCreatedTime(order.getCreatedTime());
-//        order.setUpdatedTime(order.getUpdatedTime());
-//        order.setProduct(order.getProduct());
-//        order.setCustomer(order.getCustomer());
+
         return orderRepository.save(order);
     }
 

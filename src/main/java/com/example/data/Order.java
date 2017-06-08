@@ -5,6 +5,7 @@ package com.example.data;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,12 +35,12 @@ public class Order implements Serializable {
     private LocalDate updatedTime;
 
    
-    @NotNull(message="No null")
-    @Column(name = "ORDER_QTY",nullable = false)
+   
+    @Column(name = "ORDER_QTY")
     private Long orderQuantity;
     
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CUSTOMER_ID",nullable = false)
     private Customer customer;
     

@@ -26,11 +26,7 @@ public class CustomerDAOImpl implements CustomerDAO {
  }
 
     public Customer insert(Customer customer) {
-        customer.setFirstName(customer.getFirstName());
-        customer.setLastName(customer.getLastName());
-        customer.setCompanyName(customer.getCompanyName());
-        customer.setJobPosition(customer.getJobPosition());
-        customer.setContactNumber(customer.getContactNumber());
+        
         return customerRepository.save(customer);
         
     }

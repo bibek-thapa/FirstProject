@@ -1,4 +1,6 @@
-
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="SITE_URL" value="${pageContext.request.contextPath}"/>
 <style>
 @media (min-width: 768px) {
  .navbar-brand {
@@ -21,7 +23,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Online Store</a>
+      <a class="navbar-brand" href="${SITE_URL}">Online Store</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -33,8 +35,15 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Add Product &nbsp;<span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-        <li><a href="#">Sign In&nbsp;<span class="glyphicon glyphicon-log-in"></span></a></li>
+          <c:choose>
+          <c:when test="${not empty thought}">
+          <li><a href="${SITE_URL}/cart/list">&nbsp;<span class="glyphicon glyphicon-shopping-cart">(${thought.size()})</span></a></li>
+          </c:when>
+          <c:otherwise>
+                    <li><a href="${SITE_URL}/cart/list">&nbsp;<span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+          </c:otherwise>
+          </c:choose>
+          <li><a href="#">Sign In&nbsp;<span class="glyphicon glyphicon-log-in"></span></a></li>
         
       </ul>
     </div><!-- /.navbar-collapse -->
