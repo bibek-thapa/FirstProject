@@ -30,8 +30,10 @@
 
         <div class="col-md-8 col-sm-8">
             
-           
+                          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+
             <div class="row">
+
 
 
                 <c:forEach var="order" items="${thought}" varStatus="loop">
@@ -40,13 +42,13 @@
 
                         <div class="thumbnail">
                             <a href="${SITE_URL}/cart/remove?id=${loop.index}">  <span class="pull-right glyphicon glyphicon-remove"></span></a>  
-                            <img src="${SITE_URL}/imageDisplay?id=${order.id}" alt="" class="img-responsive">
+                            <img src="${SITE_URL}/imageDisplay?id=${order.product.id}" alt="" class="img-responsive">
 
                             <div class="caption">
-                                <h4 class="pull-right">Rs.${order.pperUnit}</h4>
-                                <h4><a href="${SITE_URL}/product/view?id=${order.id}">${order.productName}</a></h4>
+                                <h4 class="pull-right">Rs.${order.product.pperUnit}</h4>
+                                <h4><a href="${SITE_URL}/product/view?id=${order.product.id}">${order.product.productName}</a></h4>
                                 <p>Description</p>
-                                qty<input class="form-control field-right" name="orderQuantity" readonly />
+                                qty<input class="form-control field-right" name="orderQuantity" value="${order.orderQuantity}" readonly />
                             </div><!--end of caption-->
                         </div><!--end of thumbnail-->
 

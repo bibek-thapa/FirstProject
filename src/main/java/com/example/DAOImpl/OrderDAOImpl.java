@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 
 @Service
 public class OrderDAOImpl implements OrderDAO {
@@ -18,7 +19,7 @@ public class OrderDAOImpl implements OrderDAO {
         return orderRepository.findAll();
     }
 
-    
+    @Transactional(value = Transactional.TxType.REQUIRES_NEW)
     public Order insert(Order order) {
 
         return orderRepository.save(order);

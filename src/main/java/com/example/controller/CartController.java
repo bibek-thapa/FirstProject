@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@SessionAttributes("thought")
+@SessionAttributes({"thought"})
 
 @RequestMapping(value = "/cart")
 public class CartController {
@@ -41,8 +42,6 @@ public class CartController {
 
     Logger logger = Logger.getLogger("CartController.class");
 
-    
-
     @RequestMapping(value = "/remove")
     public ModelAndView remove(@RequestParam("id") int id) {
         ModelAndView mav = new ModelAndView();
@@ -50,14 +49,27 @@ public class CartController {
         mav.setViewName("redirect:/cart/list");
         return mav;
     }
-    
-    @RequestMapping(value = "/add/{id}", method = RequestMethod.POST)
-    public ModelAndView create(@RequestParam(value="id")Long id) {
+
+    @PostMapping(value = "/addtocart")
+    public ModelAndView addToCart() {
+        ModelAndView mav = new ModelAndView();
+
+        //mav.addObject("thought", cartList);
+        logger.info(cartList);
+        mav.setViewName("redirect:/cart/list");
+        return mav;
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ModelAndView create(@RequestParam("id") Long id, @RequestParam("orderQuantity") Long orderQty) {
 
         ModelAndView mav = new ModelAndView();
-        
-        //mav.addObject("thought", cartList);
-        
+        Order order = new Order();
+        order.setProduct(productDAO.getById(id));
+        order.setOrderQuantity(orderQty);
+        cartList.add(order);
+        mav.addObject("thought", cartList);
+
         logger.info(cartList);
         mav.setViewName("redirect:/cart/list");
         return mav;
@@ -66,47 +78,57 @@ public class CartController {
     @RequestMapping(value = "/list")
     public ModelAndView list(@ModelAttribute("cartForm") Customer customer) {
         ModelAndView mav = new ModelAndView();
-     //   logger.info("productQuantity");
+        //   logger.info("productQuantity");
         mav.setViewName("/admin/cartview");
         return mav;
     }
 
-  
     @RequestMapping(value = "/order", method = RequestMethod.POST)
-    public ModelAndView order(HttpServletRequest request,SessionStatus status, @Valid @ModelAttribute("cartForm") Customer customer, BindingResult result) {
+    public ModelAndView order(HttpServletRequest request, SessionStatus status, @Valid @ModelAttribute("cartForm") Customer customer, BindingResult result) {
         ModelAndView mav = new ModelAndView();
-        Order order = new Order();
-       
+
         if (result.hasErrors()) {
             logger.info(result);
             logger.info("Form has errors");
             mav.setViewName("admin/cartview");
-        }
-        else {
+        } else {
             logger.info("----------------------------------------------------Start of for loop");
-            
-            for(int i =0 ; i < cartList.size();i++){
-                Product product = (Product)cartList.get(i);
+//
+            for (int i = 0; i < cartList.size(); i++) {
+                Customer c = new Customer();
+                c.setFirstName(customer.getFirstName());
+                c.setLastName(customer.getLastName());
+                c.setAddress(customer.getAddress());
+                c.setEmailAddress(customer.getEmailAddress());
+                c.setContactNumber(customer.getContactNumber());
+                c.setJobPosition(customer.getJobPosition());
+                c.setCompanyName(customer.getCompanyName());
+                Order order = (Order) cartList.get(i);//new Order();
+//                Product product = (Product) cartList.get(i);
                 logger.info(cartList.get(i));
                 logger.info(customer.toString());
                 logger.info(i);
-                order.setOrderQuantity(12L);
-                order.setCustomer(customer);
-                order.setProduct(product);
+//                order.setOrderQuantity(12L);
+                order.setCustomer(c);
+//                order.setProduct(product);
                 logger.info("Before the insert");
-                orderDAO.insert(order);
+                if(i !=0) {
+                    logger.info("Customer Id: " + order.getCustomer().getId());     
+                }
+                logger.info("Customer Name: " + order.getCustomer().getFirstName());
+                logger.info("Product Name: " + order.getProduct().getProductName());
+                logger.info("Order Quantity: " + order.getOrderQuantity());
+                logger.info("Order Id: " + orderDAO.insert(order).getId());
                 logger.info("After the insert");
-                
             }
-            
-           logger.info("----------------------------------------------------End of for loop");
 
-               
+            logger.info("----------------------------------------------------End of for loop");
+
             status.setComplete();
             cartList.clear();
             logger.info("No error");
             mav.setViewName("redirect:/");
-    }     
+        }
         return mav;
     }
 

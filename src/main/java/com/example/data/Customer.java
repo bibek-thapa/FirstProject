@@ -24,7 +24,7 @@ public class Customer implements Serializable  {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @NotEmpty
+    @NotNull
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 

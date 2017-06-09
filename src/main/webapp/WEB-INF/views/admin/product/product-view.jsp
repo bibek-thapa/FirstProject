@@ -54,7 +54,7 @@
                     <h2 class="product-price">Rs.&nbsp;${product.pperUnit}</h2>
                 </div>
             </div><!-- end row -->
-            <form method="post" action="${SITE_URL}/cart/add/${product.id}">
+            <form method="post" action="${SITE_URL}/cart/add">
                 <div class="row add-to-cart">
                     <div class="col-md-5 product-qty">
                         <span class="btn btn-default btn-lg btn-qty">
@@ -62,12 +62,14 @@
                         </span>
 
                         <input class="btn btn-default btn-lg btn-qty" value="1" name="orderQuantity"/>
-
+                        <input type="hidden" value="${product.id}" name="id" /> 
                         <span class="btn btn-default btn-lg btn-qty aria-hidden">
                             <span class="glyphicon glyphicon-minus"></span>
                         </span>
 
                     </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+
 
                     <div class="col-md-4">
                         <button class="btn btn-lg" type="submit">
@@ -76,7 +78,8 @@
                     </div>
                 </div><!--end row -->
                 <p></p>
-            </form>    
+            </form> 
+                
 
 
             <div class="row">
