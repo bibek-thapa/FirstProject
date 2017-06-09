@@ -13,8 +13,10 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,22 +41,24 @@ public class CartController {
 
     Logger logger = Logger.getLogger("CartController.class");
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView add(@RequestParam("id") Long id, HttpServletRequest request) {
-
-        ModelAndView mav = new ModelAndView();
-        cartList.add(productDAO.getById(id));
-        mav.addObject("thought", cartList);
-        mav.addObject("orderQuantity", request.getAttribute("orderQuantity"));
-        logger.info(cartList);
-        mav.setViewName("redirect:/cart/list");
-        return mav;
-    }
+    
 
     @RequestMapping(value = "/remove")
     public ModelAndView remove(@RequestParam("id") int id) {
         ModelAndView mav = new ModelAndView();
         cartList.remove(cartList.get(id));
+        mav.setViewName("redirect:/cart/list");
+        return mav;
+    }
+    
+    @RequestMapping(value = "/add/{id}", method = RequestMethod.POST)
+    public ModelAndView create(@RequestParam(value="id")Long id) {
+
+        ModelAndView mav = new ModelAndView();
+        
+        //mav.addObject("thought", cartList);
+        
+        logger.info(cartList);
         mav.setViewName("redirect:/cart/list");
         return mav;
     }
@@ -67,6 +71,7 @@ public class CartController {
         return mav;
     }
 
+  
     @RequestMapping(value = "/order", method = RequestMethod.POST)
     public ModelAndView order(HttpServletRequest request,SessionStatus status, @Valid @ModelAttribute("cartForm") Customer customer, BindingResult result) {
         ModelAndView mav = new ModelAndView();

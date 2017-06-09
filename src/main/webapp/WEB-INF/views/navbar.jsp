@@ -43,8 +43,9 @@
                     <li><a href="${SITE_URL}/cart/list">&nbsp;<span class="glyphicon glyphicon-shopping-cart"></span></a></li>
           </c:otherwise>
           </c:choose>
-          <li><a href="#">Sign In&nbsp;<span class="glyphicon glyphicon-log-in"></span></a></li>
-        
+          <li><a href="${SITE_URL}/login">Sign In&nbsp;<span class="glyphicon glyphicon-log-in"></span></a></li>
+          <li><a href="${SITE_URL}/logout">Sign Out&nbsp;<span class="glyphicon glyphicon-log-out"></span></a></li>
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

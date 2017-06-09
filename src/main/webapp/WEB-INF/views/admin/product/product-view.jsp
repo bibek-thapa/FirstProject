@@ -54,7 +54,7 @@
                     <h2 class="product-price">Rs.&nbsp;${product.pperUnit}</h2>
                 </div>
             </div><!-- end row -->
-            <form method="post" action="${SITE_URL}/cart/add?id=${product.id}">
+            <form method="post" action="${SITE_URL}/cart/add/${product.id}">
                 <div class="row add-to-cart">
                     <div class="col-md-5 product-qty">
                         <span class="btn btn-default btn-lg btn-qty">
@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <button class="btn btn-lg">
+                        <button class="btn btn-lg" type="submit">
                             Add to Cart 
                         </button>
                     </div>

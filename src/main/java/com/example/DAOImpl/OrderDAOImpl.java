@@ -5,6 +5,7 @@ import com.example.data.Order;
 import com.example.repository.OrderRepository;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +18,7 @@ public class OrderDAOImpl implements OrderDAO {
         return orderRepository.findAll();
     }
 
+    
     public Order insert(Order order) {
 
         return orderRepository.save(order);

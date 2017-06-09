@@ -1,5 +1,8 @@
 package com.example.config;
 
+import java.util.EnumSet;
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -7,6 +10,7 @@ import javax.servlet.ServletRegistration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 public class FirstProjWebAppInitializer implements WebApplicationInitializer {
@@ -15,10 +19,18 @@ private static final String DISPATCHER_SERVLET_NAME = "dispatcher1";
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-		ctx.register(JPAConfig.class,WebConfig.class,RootConfig.class);
+		ctx.register(JPAConfig.class,WebConfig.class,RootConfig.class,SecurityConfig.class);
 		servletContext.addListener(new ContextLoaderListener(ctx));
+                
+                FilterRegistration fr = servletContext.addFilter("springSecurityFilterChain",
+				new DelegatingFilterProxy());
+		fr.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST,
+				DispatcherType.FORWARD, DispatcherType.INCLUDE), false, "/*");
 
 		ctx.setServletContext(servletContext);
+                
+                    
+                
 
 		ServletRegistration.Dynamic servlet = servletContext.addServlet(DISPATCHER_SERVLET_NAME,
 				new DispatcherServlet(ctx));
