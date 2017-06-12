@@ -26,7 +26,10 @@ public class CustomerDAOImpl implements CustomerDAO {
  }
 
     public Customer insert(Customer customer) {
-        
+        if(customer == null)
+        {
+            //throw customer not found exception
+        }
         return customerRepository.save(customer);
         
     }
@@ -48,10 +51,12 @@ public class CustomerDAOImpl implements CustomerDAO {
     public Customer update(Customer c, Long id) {
         Customer toUpdate = customerRepository.findOne(id);
         toUpdate.setFirstName(c.getFirstName());
-        toUpdate.setCompanyName(c.getCompanyName());
+        toUpdate.setEmailAddress(c.getEmailAddress());
+        toUpdate.setAddress(c.getAddress());
         toUpdate.setLastName(c.getLastName());
         toUpdate.setJobPosition(c.getJobPosition());
         toUpdate.setContactNumber(c.getContactNumber());
+        toUpdate.setCompanyName(c.getCompanyName());
         return customerRepository.save(toUpdate);
         
     }

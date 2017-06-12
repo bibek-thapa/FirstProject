@@ -22,6 +22,10 @@ public class OrderDAOImpl implements OrderDAO {
     @Transactional(value = Transactional.TxType.REQUIRES_NEW)
     public Order insert(Order order) {
 
+        if(order == null)
+        {
+            //TODO throw exception
+        }
         return orderRepository.save(order);
     }
 
@@ -37,8 +41,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     public Order update(Order order, Long id) {
         Order toUpdate = orderRepository.findOne(id);
-        toUpdate.setOrderQuantity(order.getOrderQuantity());
-        toUpdate.setUpdatedTime(order.getUpdatedTime());
+        
         return orderRepository.save(toUpdate);
     }
 

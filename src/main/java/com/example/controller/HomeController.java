@@ -1,19 +1,17 @@
 package com.example.controller;
 
-import com.example.data.Company;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.example.DAOService.CompanyDAO;
 import com.example.DAOService.ProductDAO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.omg.CORBA.MARSHAL;
+import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +22,8 @@ public class HomeController {
        
         @Autowired
         ProductDAO  productDAO;
+        
+        Logger logger = Logger.getLogger(HomeController.class);
     
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mav){
@@ -34,10 +34,20 @@ public class HomeController {
 	}
         
         @RequestMapping(value="/login")
-        public ModelAndView login()
+        public ModelAndView login(HttpServletRequest request,HttpServletResponse response)
         {
             ModelAndView mav = new ModelAndView();
-            mav.setViewName("/loginpage");
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            
+            if(auth == null)
+            {
+                   
+            }
+            else
+            {
+                mav.setViewName("/loginpage");
+                
+            }
             return mav;
         
         }
@@ -50,7 +60,7 @@ public class HomeController {
             {
                 new SecurityContextLogoutHandler().logout(request, response, auth);
             }
-            return "redirect:login?logout";
+            return "redirect:/";
         }
         
         @RequestMapping(value = "/accessdenied" ,method = RequestMethod.GET)
@@ -59,6 +69,19 @@ public class HomeController {
         
             return "accessDenied";
         
+        }
+        
+        @RequestMapping(value = "/test")
+        public String currentUser(HttpSession session)
+        {
+
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            logger.info(((UserDetails)principal).getUsername());
+            logger.info(((UserDetails)principal).getAuthorities());
+            logger.info(principal.toString());
+            logger.info(SecurityContextHolder.getContext());
+            logger.info(session.getId());
+            return null;
         }
     
 	

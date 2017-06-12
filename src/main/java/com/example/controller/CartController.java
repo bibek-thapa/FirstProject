@@ -1,9 +1,12 @@
 package com.example.controller;
 
+import com.example.DAOService.CustomerDAO;
 import com.example.DAOService.OrderDAO;
+import com.example.DAOService.OrderDetailDAO;
 import com.example.DAOService.ProductDAO;
 import com.example.data.Customer;
 import com.example.data.Order;
+import com.example.data.OrderDetail;
 import com.example.data.Product;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,38 +39,26 @@ public class CartController {
     ProductDAO productDAO;
 
     @Autowired
+    OrderDetailDAO orderDetailDAO;
+
+    @Autowired
     OrderDAO orderDAO;
+    
+    @Autowired
+    CustomerDAO customerDAO;
 
     List<Object> cartList = new ArrayList<Object>();
 
     Logger logger = Logger.getLogger("CartController.class");
 
-    @RequestMapping(value = "/remove")
-    public ModelAndView remove(@RequestParam("id") int id) {
-        ModelAndView mav = new ModelAndView();
-        cartList.remove(cartList.get(id));
-        mav.setViewName("redirect:/cart/list");
-        return mav;
-    }
-
-    @PostMapping(value = "/addtocart")
-    public ModelAndView addToCart() {
-        ModelAndView mav = new ModelAndView();
-
-        //mav.addObject("thought", cartList);
-        logger.info(cartList);
-        mav.setViewName("redirect:/cart/list");
-        return mav;
-    }
-
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView create(@RequestParam("id") Long id, @RequestParam("orderQuantity") Long orderQty) {
 
         ModelAndView mav = new ModelAndView();
-        Order order = new Order();
-        order.setProduct(productDAO.getById(id));
-        order.setOrderQuantity(orderQty);
-        cartList.add(order);
+        OrderDetail orderDetail = new OrderDetail();
+        orderDetail.setProduct(productDAO.getById(id));
+        orderDetail.setOrderQuantity(orderQty);
+        cartList.add(orderDetail);
         mav.addObject("thought", cartList);
 
         logger.info(cartList);
@@ -75,71 +66,46 @@ public class CartController {
         return mav;
     }
 
+    @RequestMapping(value = "/remove")
+    public ModelAndView remove(@RequestParam("id") int id, SessionStatus status, HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+        logger.info("CartList:" + cartList);
+        logger.info("CartList:" + session.getAttribute("thought"));
+
+        cartList.remove(cartList.get(id));
+        mav.setViewName("redirect:/cart/list");
+
+        return mav;
+    }
+
     @RequestMapping(value = "/list")
     public ModelAndView list(@ModelAttribute("cartForm") Customer customer) {
         ModelAndView mav = new ModelAndView();
-        //   logger.info("productQuantity");
         mav.setViewName("/admin/cartview");
         return mav;
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.POST)
-    public ModelAndView order(HttpServletRequest request, SessionStatus status, @Valid @ModelAttribute("cartForm") Customer customer, BindingResult result) {
+    public ModelAndView order(HttpServletRequest request, SessionStatus status) {
         ModelAndView mav = new ModelAndView();
+        orderDetailHelper();
+        status.setComplete();
+        cartList.clear();
+        mav.setViewName("redirect:/");
+        logger.info("No error");
 
-        if (result.hasErrors()) {
-            logger.info(result);
-            logger.info("Form has errors");
-            mav.setViewName("admin/cartview");
-        } else {
-            logger.info("----------------------------------------------------Start of for loop");
-//
-            for (int i = 0; i < cartList.size(); i++) {
-                Customer c = new Customer();
-                c.setFirstName(customer.getFirstName());
-                c.setLastName(customer.getLastName());
-                c.setAddress(customer.getAddress());
-                c.setEmailAddress(customer.getEmailAddress());
-                c.setContactNumber(customer.getContactNumber());
-                c.setJobPosition(customer.getJobPosition());
-                c.setCompanyName(customer.getCompanyName());
-                Order order = (Order) cartList.get(i);//new Order();
-//                Product product = (Product) cartList.get(i);
-                logger.info(cartList.get(i));
-                logger.info(customer.toString());
-                logger.info(i);
-//                order.setOrderQuantity(12L);
-                order.setCustomer(c);
-//                order.setProduct(product);
-                logger.info("Before the insert");
-                if(i !=0) {
-                    logger.info("Customer Id: " + order.getCustomer().getId());     
-                }
-                logger.info("Customer Name: " + order.getCustomer().getFirstName());
-                logger.info("Product Name: " + order.getProduct().getProductName());
-                logger.info("Order Quantity: " + order.getOrderQuantity());
-                logger.info("Order Id: " + orderDAO.insert(order).getId());
-                logger.info("After the insert");
-            }
-
-            logger.info("----------------------------------------------------End of for loop");
-
-            status.setComplete();
-            cartList.clear();
-            logger.info("No error");
-            mav.setViewName("redirect:/");
-        }
         return mav;
     }
 
     @RequestMapping(value = "/sessiontest")
     public ModelAndView sessiontest(SessionStatus status, HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView();
-        logger.info(request.getAttribute("personName"));
-        status.setComplete();
-        cartList.clear();
-        mav.setViewName("/sessiontest");
-        return mav;
+        for (int i = 0; i < cartList.size(); i++) {
+
+            OrderDetail orderDetail = (OrderDetail) (cartList.get(i));
+            logger.info(orderDetail.getProduct().getProductName());
+            logger.info(orderDetail.getOrder().getCustomer());
+        }
+        return null;
 
     }
 
@@ -150,6 +116,29 @@ public class CartController {
         mav.setViewName("redirect:sessiontest");
         return mav;
 
+    }
+    
+    public void orderDetailHelper()
+    {
+        Double total = 0.0 ;
+        Order order = new Order();
+        order.setCustomer(customerDAO.getById(273L));
+        orderDAO.insert(order);
+        for (int i = 0; i < cartList.size(); i++) {
+            logger.info(i);
+            OrderDetail orderDetail = new OrderDetail();
+            
+            orderDetail.setOrder(order);
+            orderDetail.setProduct(((OrderDetail) cartList.get(i)).getProduct());
+            orderDetail.setOrderQuantity(((OrderDetail) cartList.get(i)).getOrderQuantity());
+            logger.info(((OrderDetail) cartList.get(i)).getProduct());
+            logger.info("subtotal : "+((OrderDetail) cartList.get(i)).getProduct().getPperUnit()*((OrderDetail) cartList.get(i)).getOrderQuantity());
+            total = total  + ((OrderDetail) cartList.get(i)).getOrderQuantity() *(((OrderDetail) cartList.get(i)).getProduct().getPperUnit());
+            logger.info("total : " + total);
+            orderDetailDAO.insert(orderDetail);
+
+        }
+    
     }
 
 }

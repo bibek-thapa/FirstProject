@@ -24,9 +24,7 @@ public class OrderController {
 
     @Autowired
     private CustomerDAO customerDAO;
-
-    @Autowired
-    private ProductDAO productDAO;
+    
 
     @Autowired
     private MessageSource messageSource;
@@ -38,7 +36,6 @@ public class OrderController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/admin/order/order-form");
         mav.addObject("orderForm", order);
-        mav.addObject("productList", productDAO.getAll());
         mav.addObject("customerList",customerDAO.getAll());
         return mav;
     }
@@ -46,13 +43,11 @@ public class OrderController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ModelAndView create(@Valid @ModelAttribute("orderForm") Order orderForm, BindingResult result) {
         ModelAndView mav = new ModelAndView();
-       mav.addObject("productList", productDAO.getAll());
         mav.addObject("customerList",customerDAO.getAll());
         if (result.hasErrors()) {
             mav.setViewName("/admin/order/order-form");
         } else {
-            //Product product = productDAO.getById(orderForm.getProduct().getId());
-            //orderForm.setProduct(product);
+            
             orderDAO.insert(orderForm);
             mav.setViewName("redirect:/order/list");
         }

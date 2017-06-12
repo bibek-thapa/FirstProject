@@ -18,40 +18,40 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Customer")
-public class Customer implements Serializable  {
+public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @NotNull
+    @NotEmpty
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
-
+    
     @NotEmpty
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
-    
-    @Column(name = "JOB_POSITION")
-    private String jobPosition;
-
-    
-    @Column(name = "COMPANY_NAME")
-    private String companyName;
-
+        
     @NotNull
     @Column(name = "CUSTOMER_CONTACTNO", nullable = false)
     private Long contactNumber;
-    
+
+       
     @NotEmpty
     @Column(name = "CUSTOMER_ADDRESS", nullable = false)
     private String address;
-    
+
     @Email
     @NotEmpty
     @Column(name = "EMAIL_ADDRESS", nullable = false)
     private String emailAddress;
+
+    @Column(name = "JOB_POSITION")
+    private String jobPosition;
+
+    @Column(name = "COMPANY_NAME")
+    private String companyName;
 
     public String getAddress() {
         return address;
@@ -68,9 +68,6 @@ public class Customer implements Serializable  {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-    
-    
-    
 
     public String getLastName() {
         return lastName;
@@ -96,8 +93,6 @@ public class Customer implements Serializable  {
         this.companyName = companyName;
     }
 
-    
-
     public Long getContactNumber() {
         return contactNumber;
     }
@@ -105,10 +100,6 @@ public class Customer implements Serializable  {
     public void setContactNumber(Long contactNumber) {
         this.contactNumber = contactNumber;
     }
-    
-    
-    
-
 
     public String getFirstName() {
         return firstName;
@@ -125,8 +116,5 @@ public class Customer implements Serializable  {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    
 
-    
 }

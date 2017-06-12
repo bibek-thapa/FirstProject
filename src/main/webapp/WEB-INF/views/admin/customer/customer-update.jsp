@@ -1,60 +1,78 @@
-<%@page contentType="text/html" pageEncoding="windows-1252"%>
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file = "../../header.jsp" %>
 
 
 <h1 class="text-center">  Customer Details </h1>
 <br/>
-<form class="form-horizontal" method="POST" action="${SITE_URL}/customer/edit/${customer.id}">
+<form:form class="form-horizontal" method="POST" modelAttribute="customerForm" action="${SITE_URL}/customer/edit/${id}">
 
+    <form:input type="hidden" path="id"/>
     <div class="form-group">
-        <label  class="col-sm-3 control-label">First Name</label>
+        <label for="FirstName" class="col-sm-3 control-label">First Name</label>
         <div class="col-sm-8">
-            <input type="text" class="form-control" 
-                   placeholder="FirstName" name="firstName" value="${customer.firstName}">
+            <form:input type="text" class="form-control" 
+                        placeholder="FirstName" path="firstName" />
         </div>
+
     </div>
 
     <div class="form-group">
-        <label for="Last Name" class="col-sm-3 control-label">Last Name</label>
+        <label  class="col-sm-3 control-label">Last Name</label>
         <div class="col-sm-8">
-            <input type="text" class="form-control" 
-                   placeholder="Last Name"  name="lastName" value="${customer.lastName}">
+            <form:input type="text" class="form-control" 
+                        placeholder="Last Name"  path="lastName" value="${customer.lastName}"/>
         </div>
+
+    </div>
+    <div class="form-group">
+        <label  class="col-sm-3 control-label"> Address</label>
+        <div class="col-sm-8">
+            <form:input type="text" class="form-control" 
+                        placeholder="Enter the Address"  path="address" value="${customer.address}"/>
+        </div>
+
+    </div>    
+
+    <div class="form-group">
+        <label  class="col-sm-3 control-label">Email Address</label>
+        <div class="col-sm-8">
+            <form:input type="text" class="form-control" 
+                        placeholder="Enter the email Address"  path="emailAddress" value="${customer.emailAddress}"/>
+        </div>
+
     </div>
 
-   
-    
-     <div class="form-group">
+
+
+    <div class="form-group">
+        <label for="COMPANY" class="col-sm-3 control-label">COMPANY</label>
+        <div class="col-sm-8">
+            <form:input type="text" class="form-control" 
+                        placeholder="COMPANY" path="companyName" value="${customer.companyName}"/>
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
         <label  class="col-sm-3 control-label">JOB POSITION</label>
         <div class="col-sm-8">
-            <input type="text" class="form-control" 
-                    name="jobPosition" value="${customer.jobPosition}">
+            <form:input type="text" class="form-control" 
+                        placeholder="JOB POSITION" path="jobPosition" value="${customer.jobPosition}"/>
         </div>
+
     </div>
 
 
     <div class="form-group">
-        <label for="Company Name" class="col-sm-3 control-label">Company Name</label>
+        <label  class="col-sm-3 control-label">Contact Number</label>
         <div class="col-sm-8">
-            <input type="text" class="form-control" 
-                    name="companyName" value="${customer.companyName}">
+            <form:input type="number" class="form-control" 
+                        placeholder="Enter the Contact Number" path="contactNumber" value="${customer.contactNumber}"/>
         </div>
+
     </div>
     <br/>
-    
-    
-    <div class="form-group">
-        <label for="Contact Number" class="col-sm-3 control-label">Contact Number</label>
-        <div class="col-sm-8">
-            <input type="text" class="form-control" 
-                    name="contactNumber" value="${customer.contactNumber}">
-        </div>
-    </div>
-    <br/>
-
-
-
-
     <div class="clearfix">&nbsp;</div>
     <div class="col-sm-12 text-center">
         <button type="submit" class="btn btn-primary btn-md"><span
@@ -65,7 +83,6 @@
 
 
 
-
-</form>        
+</form:form>        
 
 <%@include file = "../../footer.jsp" %>
