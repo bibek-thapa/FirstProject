@@ -46,10 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().
-                authorizeRequests().antMatchers("/").permitAll()
-       .antMatchers("/cart/order").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/company/**").access("hasRole('ROLE_ADMIN')")
+        http. authorizeRequests().antMatchers("/").permitAll()
+       .antMatchers("/cart/order").hasAuthority("ADMIN")
+                .antMatchers("/product/**").hasAuthority("ADMIN")
 
                .and()
                 .formLogin().loginPage("/login").failureUrl("/login?auth=failure").

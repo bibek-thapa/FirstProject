@@ -4,6 +4,7 @@ import com.example.DAOService.CustomerDAO;
 import com.example.DAOService.OrderDAO;
 import com.example.DAOService.OrderDetailDAO;
 import com.example.DAOService.ProductDAO;
+import com.example.DAOService.UserDAO;
 import com.example.data.Customer;
 import com.example.data.Order;
 import com.example.data.OrderDetail;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -43,9 +46,12 @@ public class CartController {
 
     @Autowired
     OrderDAO orderDAO;
-    
+
     @Autowired
     CustomerDAO customerDAO;
+
+    @Autowired
+    UserDAO userDAO;
 
     List<Object> cartList = new ArrayList<Object>();
 
@@ -103,7 +109,6 @@ public class CartController {
 
             OrderDetail orderDetail = (OrderDetail) (cartList.get(i));
             logger.info(orderDetail.getProduct().getProductName());
-            logger.info(orderDetail.getOrder().getCustomer());
         }
         return null;
 
@@ -117,28 +122,28 @@ public class CartController {
         return mav;
 
     }
-    
-    public void orderDetailHelper()
-    {
-        Double total = 0.0 ;
+
+    public void orderDetailHelper() {
+        Double total = 0.0;
+        
         Order order = new Order();
-        order.setCustomer(customerDAO.getById(273L));
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        order.setUser(userDAO.findUserByEmail(((UserDetails) principal).getUsername()));
         orderDAO.insert(order);
         for (int i = 0; i < cartList.size(); i++) {
             logger.info(i);
             OrderDetail orderDetail = new OrderDetail();
-            
             orderDetail.setOrder(order);
             orderDetail.setProduct(((OrderDetail) cartList.get(i)).getProduct());
             orderDetail.setOrderQuantity(((OrderDetail) cartList.get(i)).getOrderQuantity());
             logger.info(((OrderDetail) cartList.get(i)).getProduct());
-            logger.info("subtotal : "+((OrderDetail) cartList.get(i)).getProduct().getPperUnit()*((OrderDetail) cartList.get(i)).getOrderQuantity());
-            total = total  + ((OrderDetail) cartList.get(i)).getOrderQuantity() *(((OrderDetail) cartList.get(i)).getProduct().getPperUnit());
+            logger.info("subtotal : " + ((OrderDetail) cartList.get(i)).getProduct().getPperUnit() * ((OrderDetail) cartList.get(i)).getOrderQuantity());
+            total = total + ((OrderDetail) cartList.get(i)).getOrderQuantity() * (((OrderDetail) cartList.get(i)).getProduct().getPperUnit());
             logger.info("total : " + total);
             orderDetailDAO.insert(orderDetail);
 
         }
-    
+
     }
 
 }

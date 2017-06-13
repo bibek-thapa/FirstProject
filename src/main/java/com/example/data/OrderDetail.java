@@ -5,6 +5,7 @@
  */
 package com.example.data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import javax.annotation.Generated;
 import javax.persistence.Column;
@@ -22,7 +23,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 @Table(name = "ORDERDETAIL_TBL")
 
-public class OrderDetail {
+public class OrderDetail implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -18,9 +18,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@SessionAttributes({"userName"})
 
 public class HomeController {
 
@@ -31,6 +33,9 @@ public class HomeController {
         @Autowired
         UserDAO userDAO;
         
+       
+            
+        
               
         
         Logger logger = Logger.getLogger(HomeController.class);
@@ -38,6 +43,9 @@ public class HomeController {
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mav){
           mav.addObject("productList", productDAO.getAll());
+         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+         //mav.addObject("userName",userDAO.findUserByEmail(((UserDetails) principal).getUsername()));
+
           mav.setViewName("index");
           return mav;
 		
@@ -120,11 +128,13 @@ public class HomeController {
         {
 
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            logger.info(((UserDetails)principal).getUsername());
+            logger.info(((UserDetails)principal));
+            
             logger.info(((UserDetails)principal).getAuthorities());
-            logger.info(principal.toString());
-            logger.info(SecurityContextHolder.getContext());
-            logger.info(session.getId());
+            //logger.info(principal.toString());
+            //logger.info(SecurityContextHolder.getContext());
+           // logger.info(session.getId());
+          
             return null;
         }
     

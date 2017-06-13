@@ -21,16 +21,20 @@ public class Order implements Serializable {
 
     
     @ManyToOne
-    @JoinColumn(name = "CUSTOMER_ID", nullable = false)
-    private Customer customer;
+    @JoinColumn(name = "USER_ID", nullable = false)
+    private UserDetail user;
 
-    public Customer getCustomer() {
-        return customer;
+    public UserDetail getUser() {
+        return user;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setUser(UserDetail user) {
+        this.user = user;
     }
+
+ 
+
+    
 
     public Long getId() {
         return id;
