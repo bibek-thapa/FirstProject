@@ -8,29 +8,22 @@ import com.example.DAOService.UserDAO;
 import com.example.data.Customer;
 import com.example.data.Order;
 import com.example.data.OrderDetail;
-import com.example.data.Product;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @SessionAttributes({"thought"})
@@ -53,7 +46,7 @@ public class CartController {
     @Autowired
     UserDAO userDAO;
 
-    List<Object> cartList = new ArrayList<Object>();
+    List<OrderDetail> cartList = new ArrayList<OrderDetail>();
 
     Logger logger = Logger.getLogger("CartController.class");
 
@@ -97,31 +90,14 @@ public class CartController {
         orderDetailHelper();
         status.setComplete();
         cartList.clear();
-        mav.setViewName("redirect:/");
+        mav.setViewName("redirect:/?ordersuccess");
         logger.info("No error");
 
         return mav;
     }
 
-    @RequestMapping(value = "/sessiontest")
-    public ModelAndView sessiontest(SessionStatus status, HttpServletRequest request) {
-        for (int i = 0; i < cartList.size(); i++) {
-
-            OrderDetail orderDetail = (OrderDetail) (cartList.get(i));
-            logger.info(orderDetail.getProduct().getProductName());
-        }
-        return null;
-
-    }
-
-    @RequestMapping(value = "/sessiontestpost", method = RequestMethod.POST)
-    public ModelAndView sessiontestpost(@RequestParam String personName) {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("thought", personName);
-        mav.setViewName("redirect:sessiontest");
-        return mav;
-
-    }
+    
+    
 
     public void orderDetailHelper() {
         Double total = 0.0;
@@ -132,13 +108,15 @@ public class CartController {
         orderDAO.insert(order);
         for (int i = 0; i < cartList.size(); i++) {
             logger.info(i);
+            
+
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setOrder(order);
-            orderDetail.setProduct(((OrderDetail) cartList.get(i)).getProduct());
-            orderDetail.setOrderQuantity(((OrderDetail) cartList.get(i)).getOrderQuantity());
-            logger.info(((OrderDetail) cartList.get(i)).getProduct());
-            logger.info("subtotal : " + ((OrderDetail) cartList.get(i)).getProduct().getPperUnit() * ((OrderDetail) cartList.get(i)).getOrderQuantity());
-            total = total + ((OrderDetail) cartList.get(i)).getOrderQuantity() * (((OrderDetail) cartList.get(i)).getProduct().getPperUnit());
+            orderDetail.setProduct((cartList.get(i)).getProduct());
+            orderDetail.setOrderQuantity((cartList.get(i)).getOrderQuantity());
+            logger.info(( cartList.get(i)).getProduct());
+            logger.info("subtotal : " + ( cartList.get(i)).getProduct().getPperUnit() * (cartList.get(i)).getOrderQuantity());
+            total = total + (cartList.get(i)).getOrderQuantity() * (( cartList.get(i)).getProduct().getPperUnit());
             logger.info("total : " + total);
             orderDetailDAO.insert(orderDetail);
 

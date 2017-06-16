@@ -28,28 +28,59 @@
             <form:errors path="pperUnit" cssClass="error"/>
         </div>
     </div>
-        
-        
-        <div class ="form-group">
-      <form:label class="col-sm-3 control-label" path="productCode">Product Code</form:label>
+
+
+    <div class ="form-group">
+        <form:label class="col-sm-3 control-label" path="productCode">Product Code</form:label>
             <div class="col-sm-6">
             <form:input class="form-control" path="productCode"/>
         </div>
-         <div class="has-error">
+        <div class="has-error">
             <form:errors path="productCode" cssClass="error"/>
         </div>
+    </div>
+
+    <div class ="form-group">
+        <form:label class="col-sm-3 control-label" path="productFeatures.description">Product Description</form:label>
+            <div class="col-sm-6">
+            <form:textarea class="form-control" path="productFeatures.description"/>
         </div>
+        <div class="has-error">
+            <form:errors path="productFeatures.description" cssClass="error"/>
+        </div>
+    </div>
         
-        <div class ="form-group">
-      <form:label class="col-sm-3 control-label" path="productImage">Product Image</form:label>
+     <div class ="form-group">
+        <form:label class="col-sm-3 control-label" path="productFeatures.features">Product Features</form:label>
+            <div class="col-sm-6">
+            <form:textarea class="form-control" path="productFeatures.features"/>
+        </div>
+        <div class="has-error">
+            <form:errors path="productFeatures.features" cssClass="error"/>
+        </div>
+    </div> 
+        
+      <div class ="form-group">
+        <form:label class="col-sm-3 control-label" path="productFeatures.notes">Product Notes</form:label>
+            <div class="col-sm-6">
+            <form:textarea class="form-control" path="productFeatures.notes"/>
+        </div>
+        <div class="has-error">
+            <form:errors path="productFeatures.notes" cssClass="error"/>
+        </div>
+    </div>    
+
+
+    <div class ="form-group">
+        <form:label class="col-sm-3 control-label" path="productImage">Product Image</form:label>
             <div class="col-sm-6">
             <form:input type="file"  class="form-control" path="productImage"/>
         </div>
-         <div class="has-error">
+        <div class="has-error">
             <form:errors path="productImage" cssClass="error"/>
         </div>
-            
-        </div>    
+
+    </div>    
     <div class="col-sm-12 text-center">
         <button type ="submit" class="btn btn-primary"><span class="glyphicon glyphicon-send "></span>
             Submit</button>    

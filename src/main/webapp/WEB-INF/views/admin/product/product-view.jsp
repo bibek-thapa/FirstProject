@@ -1,7 +1,6 @@
 <%@include file="../../header.jsp" %>
 <%@include file="../../navbar.jsp" %>
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -11,29 +10,29 @@
         </div>
         <div class="col-md-6">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-5">
                     <h1>${product.productName}</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-5">
                     <span class="label label-primary">Vintage</span>
                     <span class="monospaced">${product.productCode}</span>
                 </div>
             </div><!-- end row -->
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-5">
                     <p></p>
                     <p class="description">
 
-                        Mouse which has great quality
+                        ${product.productFeatures.description}
                     </p>
                 </div>
             </div><!-- end row -->
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <span class="sr-only">Four out of 5 stars</span>
                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
@@ -44,13 +43,13 @@
                         <span class="label label-success">61</span> </div>
 
                     <div class="col-md-6">
-                        <span class="monospaced">Write a review</span>
+                        <p>Write a review</p>
                     </div>
                 </div>
             </div> <!-- end row -->
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-5">
                     <h2 class="product-price">Rs.&nbsp;${product.pperUnit}</h2>
                 </div>
             </div><!-- end row -->
@@ -79,7 +78,7 @@
                 </div><!--end row -->
                 <p></p>
             </form> 
-                
+
 
 
             <div class="row">
@@ -98,7 +97,7 @@
 
             <div class="row">
                 <div class="col-md-12 top-10">
-                    <p>To order by telephone, <a href="tel:18005551212">please call 1-800-555-1212</a></p>
+                    <p>To order by telephone, <a href="">please call +977-47-83408</a></p>
                 </div>
             </div><!-- end row -->
 
@@ -139,14 +138,18 @@
                 <div role="tabpanel" class="tab-pane active" id="description">
                     <p></p>
                     <p>
-                        The 'Brownie' Flash B is a box camera taking 2&frac14; × 3&frac14;" frames on 620 film, made of sheet metal by Kodak Ltd. in England, 1958-60. 
+                        ${product.productFeatures.description}
                     </p>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="features">
                     <p></p>
-                    <p>Hello I am features</p>
+                    <p>${product.productFeatures.features}</p>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="notes"></div>
+                <div role="tabpanel" class="tab-pane" id="notes">
+                    <p></p>
+                    <p>${product.productFeatures.notes}</p>
+
+                </div>
                 <div role="tabpanel" class="tab-pane" id="reviews"></div>
             </div>
 

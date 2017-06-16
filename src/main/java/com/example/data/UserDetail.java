@@ -2,6 +2,7 @@ package com.example.data;
 
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -49,7 +49,7 @@ public class UserDetail implements Serializable {
     @Column(name = "USER_ACTIVE",nullable = false)
     private int active;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="USER_ROLE_TBL",joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name="roleId"))
     private Set<UserRoles> roles;

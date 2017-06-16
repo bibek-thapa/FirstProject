@@ -23,12 +23,8 @@ public class AddressDAOImpl implements AddressDAO {
         }
 
     public Address insert(Address c) {
-        Address address = new Address();
-        address.setZone(c.getZone());
-        address.setDistrict(c.getDistrict());
-        address.setPermanentAddress(c.getPermanentAddress());
-        address.setTempAddress(c.getTempAddress());
-        return addressRepository.save(address);
+       
+        return addressRepository.save(c);
        }
 
     public Address getById(Long id) {

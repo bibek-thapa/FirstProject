@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.apache.log4j.Logger;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -32,6 +34,8 @@ public class HomeController {
         
         @Autowired
         UserDAO userDAO;
+        
+        
         
        
             
@@ -97,7 +101,7 @@ public class HomeController {
             }
             else
             {
-                mav.setViewName("/loginpage");
+                mav.setViewName("/loginDesign");
                 
             }
             return mav;
@@ -124,16 +128,30 @@ public class HomeController {
         }
         
         @RequestMapping(value = "/test")
-        public String currentUser(HttpSession session)
+        public String currentUser (HttpSession session,SessionScope scope,SessionCreationPolicy creationPolicy)
         {
+            
+                    
+            logger.info(session.getAttribute("thought"));
+            logger.info(session.getId());
+
+            logger.info( session.getCreationTime());
+            logger.info(session.getServletContext());
+            logger.info(session.isNew());
+            logger.info(session.getMaxInactiveInterval());
+        
+            //Session scope
+            logger.info(scope.getConversationId());
+            //Session registry
+            logger.info(creationPolicy.name());
 
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             logger.info(((UserDetails)principal));
             
             logger.info(((UserDetails)principal).getAuthorities());
-            //logger.info(principal.toString());
-            //logger.info(SecurityContextHolder.getContext());
-           // logger.info(session.getId());
+            logger.info(principal.toString());
+            logger.info(SecurityContextHolder.getContext());
+            logger.info(session.getId());
           
             return null;
         }

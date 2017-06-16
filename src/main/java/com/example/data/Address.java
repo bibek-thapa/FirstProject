@@ -1,33 +1,35 @@
-
 package com.example.data;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Address")
 public class Address implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @Column(name = "ZONE",nullable = false)
+
+    @Column(name = "ZONE1", nullable = false)
     private String zone;
-    
-    @Column(name = "DISTRICT",nullable = false)
-    private String district;
-    
-    
-    @Column(name = "TEMP_ADDRESS",nullable = false)
-    private String tempAddress;
-    
-    @Column(name = "PERMANENT_ADDRESS",nullable = false)
-    private String permanentAddress;
+
+    public Address(String zone, USER1todelete user) {
+        this.zone = zone;
+    }
+
+    public Address() {
+    }
 
     public Long getId() {
         return id;
@@ -45,34 +47,4 @@ public class Address implements Serializable {
         this.zone = zone;
     }
 
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getTempAddress() {
-        return tempAddress;
-    }
-
-    public void setTempAddress(String tempAddress) {
-        this.tempAddress = tempAddress;
-    }
-
-    public String getPermanentAddress() {
-        return permanentAddress;
-    }
-
-    public void setPermanentAddress(String permanentAddress) {
-        this.permanentAddress = permanentAddress;
-    }
-    
-    
-    
-    
-    
-    
-    
 }

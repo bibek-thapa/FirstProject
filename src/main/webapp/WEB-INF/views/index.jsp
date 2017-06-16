@@ -26,6 +26,9 @@
                 <a href="#" class="list-group-item">Fashion</a>
                 <a href="#" class="list-group-item">Sports</a>
             </div>
+            <c:if test="${ not empty pageContext.request.userPrincipal.name}">
+                <a href="${SITE_URL}/product/create"><span class="glyphicon glyphicon-plus-sign info"></span> Add Product</a>
+            </c:if>
         </div>
 
         <div class="col-md-9 col-sm-9 col-xs-9">
@@ -83,8 +86,8 @@
                                     <span class="glyphicon glyphicon-star"></span>
                                 </p>
                             </div>
-                             
-                                    
+
+
 
                         </div>
                     </div>
@@ -97,7 +100,7 @@
 
             <div class="container">
 
-                
+
                 <!-- Footer -->
                 <footer>
                     <div class="row">
@@ -109,7 +112,7 @@
 
             </div>
         </div>
-                            
+
     </div>
 </div>
 

@@ -7,6 +7,8 @@ import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
+import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.log4j.lf5.Log4JLogRecord;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -16,11 +18,13 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class FirstProjWebAppInitializer implements WebApplicationInitializer {
 private static final String DISPATCHER_SERVLET_NAME = "dispatcher1";
 
+        
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
 		ctx.register(JPAConfig.class,WebConfig.class,RootConfig.class,SecurityConfig.class);
-		servletContext.addListener(new ContextLoaderListener(ctx));
+                
+                servletContext.addListener(new ContextLoaderListener(ctx));
                 
                 FilterRegistration fr = servletContext.addFilter("springSecurityFilterChain",
 				new DelegatingFilterProxy());

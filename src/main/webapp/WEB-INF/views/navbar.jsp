@@ -25,7 +25,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${SITE_URL}">Online Store</a>
+            <a class="navbar-brand" href="${SITE_URL}">Online Store<span class="glyphicon glyphicon-apple"></span></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -49,16 +49,15 @@
                 </c:choose>
                 <c:choose>
                     <c:when test="${ empty pageContext.request.userPrincipal.name}">
-                            <li><a href="#"><span class="glyphicon glyphicon-apple"></span></a>
-                            <li><a href="${SITE_URL}/login">Sign In&nbsp;<span class="glyphicon glyphicon-log-in"></span></a></li>
-                    </c:when>
+                <li><a href="${SITE_URL}/login">Sign In</a></li>
+                            </c:when>
                         <c:otherwise>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><label>Welcome <span class="caret"></span></label></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Action</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="${SITE_URL}/logout">Sign Out&nbsp;<span class="glyphicon glyphicon-log-out"></span></a></li>
+                                <li><a href="${SITE_URL}/logout">Sign Out</a></li>
                             </ul>
 
                         </li>
