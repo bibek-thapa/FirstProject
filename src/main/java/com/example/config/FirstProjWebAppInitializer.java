@@ -22,7 +22,7 @@ private static final String DISPATCHER_SERVLET_NAME = "dispatcher1";
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-		ctx.register(JPAConfig.class,WebConfig.class,RootConfig.class,SecurityConfig.class);
+		ctx.register(JPAConfig.class,WebConfig.class,RootConfig.class,SecurityConfig.class,MailConfig.class);
                 
                 servletContext.addListener(new ContextLoaderListener(ctx));
                 

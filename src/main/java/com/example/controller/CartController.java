@@ -1,11 +1,10 @@
 package com.example.controller;
 
-import com.example.DAOService.CustomerDAO;
+import com.example.DAOService.MailService;
 import com.example.DAOService.OrderDAO;
 import com.example.DAOService.OrderDetailDAO;
 import com.example.DAOService.ProductDAO;
 import com.example.DAOService.UserDAO;
-import com.example.data.Customer;
 import com.example.data.Order;
 import com.example.data.OrderDetail;
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,10 +39,11 @@ public class CartController {
     OrderDAO orderDAO;
 
     @Autowired
-    CustomerDAO customerDAO;
-
-    @Autowired
     UserDAO userDAO;
+    
+    @Autowired
+    MailService mailDAO;
+     
 
     List<OrderDetail> cartList = new ArrayList<OrderDetail>();
 
@@ -78,7 +77,7 @@ public class CartController {
     }
 
     @RequestMapping(value = "/list")
-    public ModelAndView list(@ModelAttribute("cartForm") Customer customer) {
+    public ModelAndView list() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/admin/cartview");
         return mav;
@@ -102,10 +101,12 @@ public class CartController {
     public void orderDetailHelper() {
         Double total = 0.0;
         
-        Order order = new Order();
+        final Order order = new Order();
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        
         order.setUser(userDAO.findUserByEmail(((UserDetails) principal).getUsername()));
         orderDAO.insert(order);
+        
         for (int i = 0; i < cartList.size(); i++) {
             logger.info(i);
             
@@ -121,6 +122,14 @@ public class CartController {
             orderDetailDAO.insert(orderDetail);
 
         }
+        
+        new Thread(new Runnable() {
+            public void run() {
+               mailDAO.sendEmail(order); 
+            }
+        }).start();
+        
+
 
     }
 

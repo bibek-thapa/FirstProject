@@ -49,7 +49,7 @@ public class UserDetail implements Serializable {
     @Column(name = "USER_ACTIVE",nullable = false)
     private int active;
     
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name="USER_ROLE_TBL",joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name="roleId"))
     private Set<UserRoles> roles;

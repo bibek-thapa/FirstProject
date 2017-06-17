@@ -1,12 +1,13 @@
 package com.example.data;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Table;
 
 @Embeddable
 @Table(name = "FEATURE_TBL")
-public class ProductFeatures {
+public class ProductFeatures implements Serializable {
 
     @Column(name = "PRODUCT_DESCRIPTION")
     private String description;

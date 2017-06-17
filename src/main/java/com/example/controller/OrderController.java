@@ -1,8 +1,6 @@
 package com.example.controller;
 
-import com.example.DAOService.CustomerDAO;
 import com.example.DAOService.OrderDAO;
-import com.example.DAOService.ProductDAO;
 import com.example.data.Order;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +20,7 @@ public class OrderController {
     @Autowired
     private OrderDAO orderDAO;
 
-    @Autowired
-    private CustomerDAO customerDAO;
+    
     
 
     @Autowired
@@ -36,14 +33,12 @@ public class OrderController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/admin/order/order-form");
         mav.addObject("orderForm", order);
-        mav.addObject("customerList",customerDAO.getAll());
         return mav;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ModelAndView create(@Valid @ModelAttribute("orderForm") Order orderForm, BindingResult result) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("customerList",customerDAO.getAll());
         if (result.hasErrors()) {
             mav.setViewName("/admin/order/order-form");
         } else {

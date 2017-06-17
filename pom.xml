@@ -16,6 +16,8 @@
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <spring.security.version>4.2.2.RELEASE</spring.security.version>
+        <javax.mail.version>1.4.7</javax.mail.version>
+        <javax.mail.api.version>1.5.5</javax.mail.api.version>
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
     
@@ -92,6 +94,12 @@
             <version>${spring.version}</version>
         </dependency>
         
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        
         
         <dependency>
             <groupId>org.springframework</groupId>
@@ -126,6 +134,8 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
+        
+        
 
         
         <dependency>
@@ -153,6 +163,21 @@
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernatevalidator.version}</version>
         </dependency>
+        
+        
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>${javax.mail.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>${javax.mail.api.version}</version>
+        </dependency>
+
         
        
        

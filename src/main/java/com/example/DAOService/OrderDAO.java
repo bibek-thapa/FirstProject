@@ -6,11 +6,14 @@
 package com.example.DAOService;
 
 import com.example.data.Order;
+import com.example.data.UserDetail;
 
 /**
  *
  * @author Dell
  */
 public interface OrderDAO extends GenericDAO<Order> {
+    
+    public void sendOrderConfirmation(UserDetail user);
     
 }

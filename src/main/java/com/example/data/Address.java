@@ -24,9 +24,7 @@ public class Address implements Serializable {
     @Column(name = "ZONE1", nullable = false)
     private String zone;
 
-    public Address(String zone, USER1todelete user) {
-        this.zone = zone;
-    }
+    
 
     public Address() {
     }

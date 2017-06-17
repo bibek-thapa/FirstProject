@@ -2,6 +2,7 @@ package com.example.DAOImpl;
 
 import com.example.DAOService.OrderDAO;
 import com.example.data.Order;
+import com.example.data.UserDetail;
 import com.example.repository.OrderRepository;
 import java.util.List;
 import javax.annotation.Resource;
@@ -46,6 +47,10 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     public Order getByName(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void sendOrderConfirmation(UserDetail user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
