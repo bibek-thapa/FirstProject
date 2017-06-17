@@ -31,8 +31,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Men<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Women</a></li>
+                <li class="active"><a href="${SITE_URL}/category/view/men">Men<span class="sr-only">(current)</span></a></li>
+                <li><a href="${SITE_URL}/category/view/women">Women</a></li>
                 <li><a href="#">Luggage</a></li>
             </ul>
 

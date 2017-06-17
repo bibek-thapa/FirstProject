@@ -5,15 +5,6 @@
 <c:set var="SITE_URL" value="${pageContext.request.contextPath}"/>
 <%@include file="navbar.jsp" %>
 
-<style>
-    .carousel-inner > .item > img,
-    .carousel-inner > .item > a > img {
-
-
-        width:50%;
-        margin: auto;
-    }
-</style>
 
 <div class="container">
 
@@ -22,6 +13,7 @@
         <div class="col-md-3 col-sm-3 col-xs-3">
             <p class="lead text-center">Categories</p>
             <div class="list-group">
+                <a href="${SITE_URL}/" class="list-group-item">All</a>
                 <a href="${SITE_URL}/category/view/electronics" class="list-group-item">Electronics</a>
                 <a href="${SITE_URL}/category/view/fashion" class="list-group-item">Fashion</a>
                 <a href="${SITE_URL}/category/view/sports" class="list-group-item">Sports</a>
@@ -32,36 +24,6 @@
         </div>
 
         <div class="col-md-9 col-sm-9 col-xs-9">
-            <div class="row carousel-holder">
-                <div class="col-md-12">
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                        </ol>
-
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img class="slide-image" src="${SITE_URL}/imageDisplay?id=77" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="${SITE_URL}/imageDisplay?id=76" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="${SITE_URL}/imageDisplay?id=75" alt="">
-                            </div>
-                        </div>
-                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
 
 
             <p></p>
@@ -94,23 +56,11 @@
 
                 </c:forEach>
             </div>
-             <div class="pagination col-sm-8 text-left">
-                <a href="#">Previous</a>
-                <span>&nbsp;&nbsp;</span>
-                <c:forEach var="i" begin="0" end="10" >
-                <a href="${SITE_URL}/page?page=${i}">${i+1}</a>
-                <span>&nbsp;&nbsp;</span>
-                </c:forEach>
-                <span >&nbsp;&nbsp;</span>
-                <a href="#">Next</a>
-                
-            </div>
-            
-            <div class="container">
-           
 
 
             <!-- /.container -->
+
+            <div class="container">
 
 
                 <!-- Footer -->

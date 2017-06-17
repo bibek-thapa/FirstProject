@@ -1,17 +1,25 @@
 package com.example.controller;
 
+import com.example.DAOService.CategoryDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.DAOService.ProductDAO;
 import com.example.DAOService.UserDAO;
+import com.example.data.Category;
+import com.example.data.Product;
 import com.example.data.UserDetail;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +27,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,12 +43,37 @@ public class HomeController {
 
     @Autowired
     UserDAO userDAO;
+    
+    @Autowired
+    CategoryDAO categoryDAO;  
+    
+    
+    
+            
 
     Logger logger = Logger.getLogger(HomeController.class);
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index(ModelAndView mav) {
-        mav.addObject("productList", productDAO.getAll());
+        
+        Pageable pageable = new PageRequest(0,6,new Sort(Sort.Direction.ASC,"id"));
+        logger.info(productDAO.getByPages(pageable));
+        mav.addObject("productList", productDAO.getByPages(pageable));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        logger.info(auth.getDetails());
+        mav.addObject("userName", name);
+        mav.setViewName("index");
+        return mav;
+
+    }
+    
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public ModelAndView index(ModelAndView mav,@RequestParam("page")int pageIndex) {
+        
+        Pageable pageable = new PageRequest(pageIndex,6,new Sort(Sort.Direction.ASC,"id"));
+        logger.info(productDAO.getByPages(pageable));
+        mav.addObject("productList", productDAO.getByPages(pageable));
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
         logger.info(auth.getDetails());
@@ -105,6 +140,18 @@ public class HomeController {
     public String accessDenied() {
 
         return "accessDenied";
+
+    }
+    
+    
+    @RequestMapping(value = "/category/view/{name}")
+    public ModelAndView categoryview(@PathVariable("name") String name) {
+        ModelAndView mav = new ModelAndView();
+        Category category = categoryDAO.getByName(name);
+        mav.setViewName("index-category");
+        logger.info(productDAO.getByCategory(category));
+        mav.addObject("productList", productDAO.getByCategory(category));
+        return mav;
 
     }
 

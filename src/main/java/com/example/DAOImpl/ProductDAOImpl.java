@@ -2,11 +2,15 @@
 package com.example.DAOImpl;
 
 import com.example.DAOService.ProductDAO;
+import com.example.data.Category;
 import com.example.data.Product;
 import com.example.repository.ProductRepository;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -61,5 +65,16 @@ public class ProductDAOImpl implements ProductDAO {
     public Product getByName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<Product> getByCategory(Category category) {
+
+        return productRepository.findByCategory(category);
+    }
+
+    public List<Product> getByPages(Pageable pageable) {
+        Page<Product> productPage = productRepository.findAll(pageable);
+        return productPage.getContent();
+    }
+
     
 }

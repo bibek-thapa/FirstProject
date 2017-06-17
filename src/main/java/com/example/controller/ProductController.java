@@ -61,6 +61,7 @@ public class ProductController {
             try {
                 byte[] productbytes = productImage.getBytes();
                 product.setProductImage(productbytes);
+                
             } catch (IOException ioe) {
                 logger.error("Image cannot be loaded");
 
@@ -114,13 +115,6 @@ public class ProductController {
 
     }
 
-    @RequestMapping(value = "/category/view")
-    public ModelAndView categoryview(@RequestParam("name") String name) {
-        ModelAndView mav = new ModelAndView();
-        Category category = categoryDAO.getByName(name);
-
-        return mav;
-
-    }
+    
 
 }

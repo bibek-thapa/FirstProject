@@ -3,6 +3,8 @@ package com.example.data;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Embeddable
@@ -17,6 +19,11 @@ public class ProductFeatures implements Serializable {
 
     @Column(name = "PRODUCT_NOTES")
     private String notes;
+    
+    
+
+   
+    
 
     public String getDescription() {
         return description;
