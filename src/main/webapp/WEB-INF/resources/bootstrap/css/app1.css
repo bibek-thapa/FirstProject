@@ -1,0 +1,58 @@
+body, #mainWrapper {
+	height: 100%;
+	background-color:rgb(245, 245, 245);
+}
+
+body, .form-control{
+	font-size:12px!important;
+}
+
+.floatRight{
+	float:right;
+	margin-right: 18px;
+}
+
+.error {
+        color: red; font-weight: bold;
+    }
+
+.has-error{
+	color:red;
+}
+
+.generic-container {
+  position:fixed;
+  width:80%;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #EAE7E7;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 0 30px black;
+}
+
+.custom-width {
+    width: 80px !important;
+}
+
+.monospaced { font-family: 'Ubuntu Mono', monospaced ; }
+
+.add-to-cart .btn-qty {
+  width: 52px;
+  height: 46px;
+}
+.add-to-cart .btn { border-radius: 0; }
+
+.thumbnail {
+   padding: 0px !important;
+}
+
+.cart-qty-input {
+  font-size: 1em;
+  margin-top: 10px;
+  padding: 10px;
+  width: 11;
+  border: 1px solid black;
+}

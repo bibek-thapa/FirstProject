@@ -1,103 +1,131 @@
-<%-- 
-    Document   : index
-    Created on : Apr 22, 2017, 9:40:18 PM
-    Author     : Dell
---%>
 <%@include file="header.jsp" %>
-<%@page contentType="text/html" pageEncoding="windows-1252"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>JSP Page</title>
-    </head>
-    <body>
-  <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/person/create">
-<
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-6">
-      <input  class="form-control" id="inputPassword3" placeholder="Person Name" name="firstName">
-    </div>
-    <br/>
-    
-    
-    <div class="col-sm-6">
-            <label  class="col-sm-2 control-label">Company</label>
-            <select  name="company.id" class="form-control">
-                
-                <c:forEach var="company" items="${companyList}">
-                    
-                <option class="form-control" value="${company.id}">${company.companyName}Ram</option>
-               
-                </c:forEach>
-                  
-            </select>
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:set var="SITE_URL" value="${pageContext.request.contextPath}"/>
+<%@include file="navbar.jsp" %>
+
+<style>
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+
+
+        width:50%;
+        margin: auto;
+    }
+</style>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-3 col-sm-3 col-xs-3">
+            <p class="lead text-center">Categories</p>
+            <div class="list-group">
+                <a href="${SITE_URL}/category/view/electronics" class="list-group-item">Electronics</a>
+                <a href="${SITE_URL}/category/view/fashion" class="list-group-item">Fashion</a>
+                <a href="${SITE_URL}/category/view/sports" class="list-group-item">Sports</a>
+            </div>
+            <c:if test="${ not empty pageContext.request.userPrincipal.name}">
+                <a href="${SITE_URL}/product/create"><span class="glyphicon glyphicon-plus-sign info"></span> Add Product</a>
+            </c:if>
         </div>
-  </div>
+
+        <div class="col-md-9 col-sm-9 col-xs-9">
+            <div class="row carousel-holder">
+                <div class="col-md-12">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img class="slide-image" src="${SITE_URL}/imageDisplay?id=77" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" src="${SITE_URL}/imageDisplay?id=76" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" src="${SITE_URL}/imageDisplay?id=75" alt="">
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
 
 
-<!--  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox"> Remember me
-        </label>
-      </div>
-    </div>
-  </div>-->
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Submit</button>
-    </div>
-  </div>
-</form>
-
-  <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/company/create">
-<!--  <div class="form-group">
-    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-    <div class="col-sm-6">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-    </div>
-  </div>-->
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-6">
-      <input  class="form-control" id="inputPassword3" placeholder="Company Name" name="companyName">
-    </div>
-  </div>
-<!--  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox"> Remember me
-        </label>
-      </div>
-    </div>
-  </div>-->
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Submit</button>
-    </div>
-  </div>
-</form>
+            <p></p>
+            <div class="row">         
+                <c:forEach var="product" items="${productList}">
+                    <div class="col-sm-4 col-lg-4 col-md-4 col-xs-4">
+                        <div class="thumbnail">
+                            <a href="${SITE_URL}/product/view?id=${product.id}"> <img src="${SITE_URL}/imageDisplay?id=${product.id}" alt=""></a>
+                            <div class="caption">
+                                <h4 class="pull-right">Rs. ${product.pperUnit}</h4>
+                                <h4><a href="${SITE_URL}/product/view?id=${product.id}">${product.productName}</a>
+                                </h4>
+                                <p>Description</p>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">15 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </p>
+                            </div>
 
 
 
-        
-        <h1>Welcome to the Home page</h1>
-        <p>
-            Welcome to the Person Application </br>
-            <i>${message}</i> </br>
-            <a href ="${pageContext.request.contextPath}/person/create">Create a new person</a></br>
-                        <a href ="${pageContext.request.contextPath}/person/list">List all persons</a></br>
-                        <a href ="${pageContext.request.contextPath}/company/list">List all companies</a></br>
+                        </div>
+                    </div>
 
+                </c:forEach>
+            </div>
+             <div class="pagination col-sm-8 text-left">
+                <a href="#">Previous</a>
+                <span>&nbsp;&nbsp;</span>
+                <c:forEach var="i" begin="0" end="10" >
+                <a href="${SITE_URL}/page?page=${i}">${i+1}</a>
+                <span>&nbsp;&nbsp;</span>
+                </c:forEach>
+                <span >&nbsp;&nbsp;</span>
+                <a href="#">Next</a>
+                
+            </div>
             
-            
-        </p>
-        
-        
-        
-    </body>
-</html>
+            <div class="container">
+           
+
+
+            <!-- /.container -->
+
+
+                <!-- Footer -->
+                <footer>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <p>Copyright &copy; 2017</p>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<%@include file="footer.jsp" %>
